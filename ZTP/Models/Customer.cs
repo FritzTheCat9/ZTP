@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -36,6 +37,6 @@ namespace ZTP
         /* POLA - ENTITY FRAMEWORK */
         [Display(Name = "AdresId")]
         public Address Address { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
     }
 }

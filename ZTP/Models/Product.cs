@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -49,6 +50,6 @@ namespace ZTP
         /* POLA - ENTITY FRAMEWORK */
         [Display(Name = "KategoriaId")]
         public Category Category { get; set; }
-        public ICollection<ProductOrder> ProductOrders { get; set; }
+        public ICollection<ProductOrder> ProductOrders { get; set; } = new ObservableCollection<ProductOrder>();
     }
 }

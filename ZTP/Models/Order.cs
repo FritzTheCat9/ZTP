@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -48,6 +49,6 @@ namespace ZTP
         public ShippingMethod ShippingMethod { get; set; }
         [Display(Name = "Płatność")]
         public PaymentMethod PaymentMethod { get; set; }
-        public ICollection<ProductOrder> ProductOrders { get; set; }
+        public ICollection<ProductOrder> ProductOrders { get; set; } = new ObservableCollection<ProductOrder>();
     }
 }
