@@ -25,7 +25,7 @@ namespace ZTP
         [Required]
         [ForeignKey("Customer")]
         [Display(Name = "KlientId")]
-        public string CustomerID { get; set; }
+        public int CustomerID { get; set; }
         [Required]
         [ForeignKey("ShippingMethod")]
         [Display(Name = "Dostawa")]

@@ -15,7 +15,7 @@ namespace ZTP
         public int AddressID { get; set; }
         [Required]
         [Display(Name = "KlientId")]
-        public string CustomerID { get; set; }
+        public int CustomerID { get; set; }
         [Required]
         [Display(Name = "Kraj")]
         public string Country { get; set; }
@@ -31,7 +31,5 @@ namespace ZTP
         [Required]
         [Display(Name = "Numer domu")]
         public int HouseNumber { get; set; }
-        [Display(Name = "Numer apartamentu")]
-        public int? ApartmentNumber { get; set; }
     }
 }
