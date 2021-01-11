@@ -38,5 +38,7 @@ namespace ZTP
         [Display(Name = "AdresId")]
         public Address Address { get; set; }
         public ICollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
+
+        /* METODY */
     }
 }

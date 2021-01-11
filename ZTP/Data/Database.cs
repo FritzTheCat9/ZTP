@@ -27,9 +27,28 @@ namespace ZTP
         {
             if (instance == null)
             {
-                instance = new Database();
+                   instance = new Database();
             }
             return instance;
+        }
+
+        /*private void createCategories() { }
+        private void createProducts() { }
+        private void createUsers() { }
+        private void createPayments() { }*/
+
+        public Customer CheckLoginAndPassword(string login, string password)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var user = context.Customers.Where(x => x.Login == login).Where(x => x.Password == password).FirstOrDefault();
+                if (user != null)
+                {
+                    return user;
+                }
+
+                return null;
+            }
         }
     }
 }
