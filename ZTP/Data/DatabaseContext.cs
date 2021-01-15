@@ -45,7 +45,7 @@ namespace ZTP
                 new Address() { AddressID = 3, CustomerID = 3, Country = "Polska", Town = "Gdańsk", PostCode = "56-765", Street = "Bursztynowa", HouseNumber = 43 });*/
 
             modelBuilder.Entity<Customer>().HasData(
-                new Customer() { CustomerID = 1, /*AddressID = 1,*/ FirstName = "Jan", LastName = "Kowalski", Login = "kowalski", Password = "kowalski", AdminRights = true },
+                new Customer() { CustomerID = 1, /*AddressID = 1,*/ FirstName = "Jan", LastName = "Kowalski", Login = "1", Password = "1", AdminRights = true },
                 new Customer() { CustomerID = 2, /*AddressID = 2,*/ FirstName = "Robert", LastName = "Nowak", Login = "nowak", Password = "nowak", AdminRights = false },
                 new Customer() { CustomerID = 3, /*AddressID = 3,*/ FirstName = "Krzysztof", LastName = "Piekarski", Login = "piekarski", Password = "piekarski", AdminRights = false });
 

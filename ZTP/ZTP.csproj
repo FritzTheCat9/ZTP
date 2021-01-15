@@ -176,9 +176,9 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20210115223733_migracja.cs" />
-    <Compile Include="Migrations\20210115223733_migracja.designer.cs">
-      <DependentUpon>20210115223733_migracja.cs</DependentUpon>
+    <Compile Include="Migrations\20210115232154_migracja.cs" />
+    <Compile Include="Migrations\20210115232154_migracja.designer.cs">
+      <DependentUpon>20210115232154_migracja.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DatabaseContextModelSnapshot.cs" />
     <Compile Include="Models\Address.cs" />

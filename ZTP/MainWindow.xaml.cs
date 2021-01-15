@@ -27,7 +27,6 @@ namespace ZTP
 
         /* LISTY Z BAZY DANYCH */
         public IList<Product> productsList { get; set; } = new ObservableCollection<Product>();
-        //public Product currentProduct = null;
         public IList<Customer> customersList { get; set; } = new ObservableCollection<Customer>();
         public IList<ShippingMethod> shippingMethodsList { get; set; } = new ObservableCollection<ShippingMethod>();
         public IList<PaymentMethod> paymentMethodsList { get; set; } = new ObservableCollection<PaymentMethod>();
@@ -54,11 +53,10 @@ namespace ZTP
             productOrdersList = new ObservableCollection<ProductOrder>(database.GetAllProductOrders().ToList());
             customerProductsList = new ObservableCollection<CustomerProduct>(database.GetAllCustomerProducts().ToList());
             comboBox_OrderStatus.ItemsSource = Enum.GetValues(typeof(State)).Cast<State>();
+            shoppingCartList = new ObservableCollection<Product>();
 
-            /*productsList = new ObservableCollection<Product>(database.GetAllProducts().ToList());
-            productsList = new ObservableCollection<Product>(database.GetAllProducts().ToList());*/
-
-
+            //subscribedProductsList = new ObservableCollection<Product>();
+            //addedPackagesList - do dodania potem
         }
 
         #region Product list
@@ -68,19 +66,22 @@ namespace ZTP
 
         }
 
-        private void MenuItem_EditProduct_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void MenuItem_DeleteProduct_Click(object sender, RoutedEventArgs e)
         {
-
+            if (listBox_ProductsList.SelectedIndex >= 0)
+            {
+                var product = (Product)listBox_ProductsList.SelectedItem;
+                productsList.Remove(product);
+            }
         }
 
         private void MenuItem_AddToCart_Click(object sender, RoutedEventArgs e)
         {
-
+            if (listBox_ProductsList.SelectedIndex >= 0)
+            {
+                var product = (Product) listBox_ProductsList.SelectedItem;
+                shoppingCartList.Add(product);
+            }
         }
 
         private void MenuItem_Observe_Click(object sender, RoutedEventArgs e)
@@ -90,7 +91,7 @@ namespace ZTP
 
         private void listBox_ProductsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
 
         #endregion
@@ -110,6 +111,15 @@ namespace ZTP
         private void MenuItem_AddPlasticBox_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void MenuItem_RemoveFromCart_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBox_ShoppingCartList.SelectedIndex >= 0)
+            {
+                var product = (Product)listBox_ShoppingCartList.SelectedItem;
+                shoppingCartList.Remove(product);
+            }
         }
 
         private void listBox_ShoppingCartList_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -55,8 +55,8 @@ namespace ZTP.Migrations
                             AdminRights = true,
                             FirstName = "Jan",
                             LastName = "Kowalski",
-                            Login = "kowalski",
-                            Password = "kowalski"
+                            Login = "1",
+                            Password = "1"
                         },
                         new
                         {
@@ -265,7 +265,6 @@ namespace ZTP.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")

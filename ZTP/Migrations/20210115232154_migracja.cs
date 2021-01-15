@@ -42,10 +42,10 @@ namespace ZTP.Migrations
                 {
                     ProductID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     Promotion = table.Column<bool>(nullable: false),
                     VAT = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
                     Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -158,7 +158,7 @@ namespace ZTP.Migrations
                 columns: new[] { "CustomerID", "AdminRights", "FirstName", "LastName", "Login", "Password" },
                 values: new object[,]
                 {
-                    { 1, true, "Jan", "Kowalski", "kowalski", "kowalski" },
+                    { 1, true, "Jan", "Kowalski", "1", "1" },
                     { 2, false, "Robert", "Nowak", "nowak", "nowak" },
                     { 3, false, "Krzysztof", "Piekarski", "piekarski", "piekarski" }
                 });

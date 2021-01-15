@@ -31,7 +31,6 @@
                         <StackPanel>
                             <Menu Margin="5" Padding="5">
                                 <MenuItem Name="MenuItem_AddProduct" Header="Add" Click="MenuItem_AddProduct_Click"/>
-                                <MenuItem Name="MenuItem_EditProduct" Header="Edit" Click="MenuItem_EditProduct_Click"/>
                                 <MenuItem Name="MenuItem_DeleteProduct" Header="Delete" Click="MenuItem_DeleteProduct_Click"/>
                                 <Separator/>
                                 <MenuItem Name="MenuItem_AddToCart" Header="Add to cart" Click="MenuItem_AddToCart_Click"/>
@@ -100,6 +99,7 @@
                             <MenuItem Name="MenuItem_AddBubbleWrap" Header="Add bubble wrap" Click="MenuItem_AddBubbleWrap_Click"/>
                             <MenuItem Name="MenuItem_AddCardboardBox" Header="Add cardboard box" Click="MenuItem_AddCardboardBox_Click"/>
                             <MenuItem Name="MenuItem_AddPlasticBox" Header="Add plastic box" Click="MenuItem_AddPlasticBox_Click"/>
+                            <MenuItem Name="MenuItem_RemoveFromCart" Header="Remove from cart" Click="MenuItem_RemoveFromCart_Click"/>
                         </Menu>
                     </StackPanel>
 
@@ -209,7 +209,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="Watched products list" HorizontalAlignment="Center" FontWeight="Bold"></Label>
+                    <Label Content="Subscribed products list" HorizontalAlignment="Center" FontWeight="Bold"></Label>
 
 
                     <Grid Grid.Row="1">
@@ -246,14 +246,14 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Content="FirstName" Margin="5" />
-                            <TextBox Name="TextBox_FirstName" Grid.Column="1" Padding="5" Margin="5"/>
+                            <Label Content="FirstName" Margin="5"/>
+                            <TextBox Name="TextBox_FirstName" Grid.Column="1" Padding="5" Margin="5" Text="{Binding customer.FirstName}"/>
                             <Label Content="LastName" Grid.Row="1" Margin="5" />
-                            <TextBox Name="TextBox_LastName" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5"/>
+                            <TextBox Name="TextBox_LastName" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5" Text="{Binding customer.LastName}"/>
                             <Label Content="Login"  Grid.Row="2" Margin="5" />
-                            <TextBox Name="TextBox_Login" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5"/>
+                            <TextBox Name="TextBox_Login" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5" Text="{Binding customer.Login}"/>
                             <Label Content="Password" Grid.Row="3" Margin="5" />
-                            <TextBox Name="TextBox_Password" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5"/>
+                            <TextBox Name="TextBox_Password" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5" Text="{Binding customer.Password}"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
