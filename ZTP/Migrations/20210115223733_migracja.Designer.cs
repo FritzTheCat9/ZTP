@@ -9,7 +9,7 @@ using ZTP;
 namespace ZTP.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210115221155_migracja")]
+    [Migration("20210115223733_migracja")]
     partial class migracja
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

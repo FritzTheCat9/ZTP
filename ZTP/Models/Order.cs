@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -16,12 +17,17 @@ namespace ZTP.Models
         Delivered = 2
     }
 
-    public class Order
+    public class Order : INotifyPropertyChanged
     {
         /* POLA */
         [Key]
         [Display(Name = "ZamówienieId")]
-        public int OrderID { get; set; }
+        private int _orderID;
+        public int OrderID
+        {
+            get { return _orderID; }
+            set { _orderID = value; NotifyPropertyChanged("OrderDisplay"); }
+        }
         [Required]
         [ForeignKey("Customer")]
         [Display(Name = "KlientId")]
@@ -41,7 +47,19 @@ namespace ZTP.Models
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         [Display(Name = "Cena")]
-        public decimal Price { get; set; }
+        private decimal _price;
+        public decimal Price
+        {
+            get { return _price; }
+            set { _price = value; NotifyPropertyChanged("OrderDisplay"); }
+        }
+
+
+        public string OrderDisplay
+        {
+            get { return OrderID + " " + Price; }
+        }
+
 
         /* POLA - ENTITY FRAMEWORK */
         public Customer Customer { get; set; }
@@ -52,5 +70,15 @@ namespace ZTP.Models
         public ICollection<ProductOrder> ProductOrders { get; set; } = new ObservableCollection<ProductOrder>();
 
         /* METODY */
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
     }
 }

@@ -22,11 +22,12 @@ namespace ZTP
     /// </summary>
     public partial class MainWindow : Window
     {
-        Database database = Database.GetInstance();
+        private Database database = Database.GetInstance();
+        public Customer customer { get; set; } = null;
 
+        /* LISTY Z BAZY DANYCH */
         public IList<Product> productsList { get; set; } = new ObservableCollection<Product>();
         //public Product currentProduct = null;
-
         public IList<Customer> customersList { get; set; } = new ObservableCollection<Customer>();
         public IList<ShippingMethod> shippingMethodsList { get; set; } = new ObservableCollection<ShippingMethod>();
         public IList<PaymentMethod> paymentMethodsList { get; set; } = new ObservableCollection<PaymentMethod>();
@@ -34,16 +35,17 @@ namespace ZTP
         public IList<ProductOrder> productOrdersList { get; set; } = new ObservableCollection<ProductOrder>();
         public IList<CustomerProduct> customerProductsList { get; set; } = new ObservableCollection<CustomerProduct>();
 
+        /* LISTY DO WIDOKU */
+        public IList<Product> shoppingCartList { get; set; } = new ObservableCollection<Product>();
+        public IList<Product> subscribedProductsList { get; set; } = new ObservableCollection<Product>();
+        //addedPackagesList - do dodania potem
 
-        //shoppingCartList
-        //addedPackagesList
-        //subscribedProductsList
-
-        public MainWindow()
+        public MainWindow(LoginWindow loginWindow)
         {
             InitializeComponent();
             DataContext = this;
 
+            customer = loginWindow.customer;
             productsList = new ObservableCollection<Product>(database.GetAllProducts().ToList());
             customersList = new ObservableCollection<Customer>(database.GetAllCustomers().ToList());
             shippingMethodsList = new ObservableCollection<ShippingMethod>(database.GetAllShippingMethods().ToList());
@@ -52,6 +54,9 @@ namespace ZTP
             productOrdersList = new ObservableCollection<ProductOrder>(database.GetAllProductOrders().ToList());
             customerProductsList = new ObservableCollection<CustomerProduct>(database.GetAllCustomerProducts().ToList());
             comboBox_OrderStatus.ItemsSource = Enum.GetValues(typeof(State)).Cast<State>();
+
+            /*productsList = new ObservableCollection<Product>(database.GetAllProducts().ToList());
+            productsList = new ObservableCollection<Product>(database.GetAllProducts().ToList());*/
 
 
         }

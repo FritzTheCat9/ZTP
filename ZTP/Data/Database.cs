@@ -53,15 +53,6 @@ namespace ZTP
             }
         }
 
-        /*public Customer AddCustomer(Customer customer)
-        {
-            using (var context = new DatabaseContext())
-            {
-                context.Customers.Add(customer);
-                return customer;
-            }
-        }*/
-
         #region GetAll Methods
 
         public IEnumerable<Product> GetAllProducts()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ZTP.Models
 {
-    public class Product
+    public class Product : INotifyPropertyChanged
     {
         /* POLA */
         [Key]
@@ -21,7 +22,13 @@ namespace ZTP.Models
         public int CategoryID { get; set; }*/
         [Required]
         [Display(Name = "Nazwa")]
-        public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; NotifyPropertyChanged("ProductDisplay"); }
+        }
+
         /*[Required]
         [Display(Name = "Opis")]
         public string Description { get; set; }*/
@@ -42,15 +49,39 @@ namespace ZTP.Models
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         [Display(Name = "Cena")]
-        public decimal Price { get; set; }
+        private decimal _price;
+        public decimal Price
+        {
+            get { return _price; }
+            set { _price = value; NotifyPropertyChanged("ProductDisplay"); }
+        }
         [Required]
         [Display(Name = "Ilość")]
         public int Quantity { get; set; }
+
+
+        public string ProductDisplay
+        {
+            get { return Name + " (" + Price + ") "; }
+        }
+
 
         /* POLA - ENTITY FRAMEWORK */
         /*[Display(Name = "KategoriaId")]
         public Category Category { get; set; }*/
         public ICollection<ProductOrder> ProductOrders { get; set; } = new ObservableCollection<ProductOrder>();
         public ICollection<CustomerProduct> CustomerProducts { get; set; } = new ObservableCollection<CustomerProduct>();
+
+        /* METODY */
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
     }
 }

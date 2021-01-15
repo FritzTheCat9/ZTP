@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ZTP.Models;
 
 namespace ZTP
 {
@@ -19,6 +20,8 @@ namespace ZTP
     /// </summary>
     public partial class LoginWindow : Window
     {
+        public Customer customer = null;
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -26,17 +29,14 @@ namespace ZTP
 
         private void Button_Login_Click(object sender, RoutedEventArgs e)
         {
-            if (Database.GetInstance().CheckLoginAndPassword(TextBox_Login.Text, TextBox_Password.Text) != null)
+            customer = Database.GetInstance().CheckLoginAndPassword(TextBox_Login.Text, TextBox_Password.Text);
+
+            if (customer != null)
             {
-                Console.WriteLine("SIEMA");
-                MainWindow mainWindow= new MainWindow();
+                MainWindow mainWindow= new MainWindow(this);
                 Close();
                 mainWindow.ShowDialog();
             }
-
-            /*Address address = new Address { Town="asd", Street="asd", PostCode="asd", Country="asd", HouseNumber=123 };
-            Customer customer = new Customer { FirstName = "FirstName", LastName = "LastName", Login = "Login", Password = "Password", AdminRights = true, Address = address };
-            Database.GetInstance().AddCustomer(customer);*/
         }
     }
 }

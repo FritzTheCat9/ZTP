@@ -40,7 +40,7 @@
                         </StackPanel>
 
                         <ListBox Grid.Row="1" Name="listBox_ProductsList" 
-                             ItemsSource="{Binding productsList}" DisplayMemberPath="Name"
+                             ItemsSource="{Binding productsList}" DisplayMemberPath="ProductDisplay"
                              Padding="5" Margin="5" SelectionChanged="listBox_ProductsList_SelectionChanged" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -104,7 +104,7 @@
                     </StackPanel>
 
                     <ListBox Grid.Row="2" Name="listBox_ShoppingCartList" 
-                             ItemsSource="{Binding shoppingCartList}" DisplayMemberPath="Name"
+                             ItemsSource="{Binding shoppingCartList}" DisplayMemberPath="ProductDisplay"
                              Padding="5" Margin="5" SelectionChanged="listBox_ShoppingCartList_SelectionChanged" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -114,7 +114,7 @@
                     <Label Grid.Column="1" Content="Added products packages" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
 
                     <ListBox Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Name="listBox_addedPackages" 
-                             ItemsSource="{Binding addedPackagesList}" DisplayMemberPath="Name"
+                             ItemsSource="{Binding addedPackagesList}" DisplayMemberPath="ProductDisplay"
                              Padding="5" Margin="5"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -169,7 +169,7 @@
 
                         <Label Content="Products in shopping cart" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
                         <ListBox Name="listBox_OrderProductList" Grid.Row="1"
-                             ItemsSource="{Binding shoppingCartList}" DisplayMemberPath="Name"
+                             ItemsSource="{Binding shoppingCartList}" DisplayMemberPath="ProductDisplay"
                              Padding="5" Margin="5"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -185,7 +185,7 @@
 
                         <Label Content="Added products packages" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
                         <ListBox Name="listBox_OrderPackagesList" Grid.Row="1"
-                             ItemsSource="{Binding addedPackagesList}" DisplayMemberPath="Name"
+                             ItemsSource="{Binding addedPackagesList}" DisplayMemberPath="ProductDisplay"
                              Padding="5" Margin="5"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -223,7 +223,7 @@
                         </Menu>
 
                         <ListBox Grid.Row="1"  Name="listBox_SubscribedProductsList" 
-                             ItemsSource="{Binding subscribedProductsList}" DisplayMemberPath="Name"
+                             ItemsSource="{Binding subscribedProductsList}" DisplayMemberPath="ProductDisplay"
                              Padding="5" Margin="5" SelectionChanged="listBox_SubscribedProductsList_SelectionChanged" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -279,7 +279,7 @@
                         </Grid.RowDefinitions>
 
                         <ListBox Name="listBox_OrdersList" 
-                             ItemsSource="{Binding ordersList}" DisplayMemberPath="OrderID"
+                             ItemsSource="{Binding ordersList}" DisplayMemberPath="OrderDisplay"
                              Padding="5" Margin="5" SelectionChanged="listBox_OrdersList_SelectionChanged" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"

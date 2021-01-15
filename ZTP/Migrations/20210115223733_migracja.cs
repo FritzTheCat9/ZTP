@@ -102,7 +102,7 @@ namespace ZTP.Migrations
                     ShippingMethodID = table.Column<int>(nullable: false),
                     PaymentMethodID = table.Column<int>(nullable: false),
                     OrderStatus = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
