@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZTP"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="140" Width="300" MaxHeight="140" MaxWidth="300" MinHeight="140" MinWidth="300">
+        Title="LoginWindow" Height="150" Width="300" MaxHeight="150" MaxWidth="300" MinHeight="150" MinWidth="300">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -17,10 +17,10 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Login"/>
-        <TextBox Name="TextBox_Login" Grid.Row="0" Grid.Column="1" Padding="5"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="Password" />
-        <TextBox Name="TextBox_Password" Grid.Row="1" Grid.Column="1" Padding="5"/>
-        <Button Name="Button_Login" Grid.Row="2" Grid.ColumnSpan="2" Content="Login" Click="Button_Login_Click" Margin="5"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Login" Margin="5"/>
+        <TextBox Name="TextBox_Login" Grid.Row="0" Grid.Column="1" Padding="5" Margin="5"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Password" Margin="5"/>
+        <TextBox Name="TextBox_Password" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5"/>
+        <Button Name="Button_Login" Grid.Row="2" Grid.ColumnSpan="2" Content="Login" Click="Button_Login_Click" Margin="5" Padding="5"/>
     </Grid>
 </Window>
