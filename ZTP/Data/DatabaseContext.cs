@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZTP.Models;
 
 namespace ZTP
 {
@@ -17,6 +18,7 @@ namespace ZTP
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProductOrder> ProductOrders { get; set; }
+        public DbSet<CustomerProduct> CustomerProducts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -52,9 +54,9 @@ namespace ZTP
                new Category() { CategoryID = 2, Name = "Smartfony" });*/
 
             modelBuilder.Entity<Product>().HasData(
-                new Product() { ProductID = 1, /*CategoryID = 1,*/ Name = "Laptop LENOVO", /*Description = "Dobry laptop LENOVO",*/ Image = "~/Images/Laptop LENOVO.jpg", /*DateAdded = new DateTime(2018, 3, 20),*/ Promotion = false, VAT = 23, Price = 4300, Quantity = 20 },
-                new Product() { ProductID = 2, /*CategoryID = 1,*/ Name = "Laptop HUAWEI", /*Description = "Dobry laptop HUAWEI",*/ Image = "~/Images/Laptop HUAWEI.png", /*DateAdded = new DateTime(2019, 10, 13),*/ Promotion = false, VAT = 23, Price = 5000, Quantity = 59 },
-                new Product() { ProductID = 3, /*CategoryID = 2,*/ Name = "Smartfon HUAWEI P30", /*Description = "Dobry smartfon HUAWEI P30",*/ Image = "~/Images/Smartfon HUAWEI P30.jpg", /*DateAdded = new DateTime(2017, 9, 9),*/ Promotion = true, VAT = 23, Price = 2999, Quantity = 67 });
+                new Product() { ProductID = 1, /*CategoryID = 1,*/ Name = "Laptop LENOVO", /*Description = "Dobry laptop LENOVO", Image = "~/Images/Laptop LENOVO.jpg",*/ /*DateAdded = new DateTime(2018, 3, 20),*/ Promotion = false, VAT = 23, Price = 4300, Quantity = 20 },
+                new Product() { ProductID = 2, /*CategoryID = 1,*/ Name = "Laptop HUAWEI", /*Description = "Dobry laptop HUAWEI", Image = "~/Images/Laptop HUAWEI.png",*/ /*DateAdded = new DateTime(2019, 10, 13),*/ Promotion = false, VAT = 23, Price = 5000, Quantity = 59 },
+                new Product() { ProductID = 3, /*CategoryID = 2,*/ Name = "Smartfon HUAWEI P30", /*Description = "Dobry smartfon HUAWEI P30", Image = "~/Images/Smartfon HUAWEI P30.jpg",*/ /*DateAdded = new DateTime(2017, 9, 9),*/ Promotion = true, VAT = 23, Price = 2999, Quantity = 67 });
 
             modelBuilder.Entity<Order>().HasData(
                 new Order() { OrderID = 1, CustomerID = 1, ShippingMethodID = 1, PaymentMethodID = 3, OrderStatus = State.Preparing, Price = 4300 },
@@ -70,6 +72,15 @@ namespace ZTP
                new ProductOrder() { ProductOrderID = 4, ProductID = 3, OrderID = 4 },
                new ProductOrder() { ProductOrderID = 5, ProductID = 1, OrderID = 5 },
                new ProductOrder() { ProductOrderID = 6, ProductID = 2, OrderID = 5 });
+
+            modelBuilder.Entity<CustomerProduct>().HasData(
+               new CustomerProduct() { CustomerProductID = 1, CustomerID = 1, ProductID = 1 },
+               new CustomerProduct() { CustomerProductID = 2, CustomerID = 1, ProductID = 2 },
+               new CustomerProduct() { CustomerProductID = 3, CustomerID = 1, ProductID = 3 },
+               new CustomerProduct() { CustomerProductID = 4, CustomerID = 2, ProductID = 1 },
+               new CustomerProduct() { CustomerProductID = 5, CustomerID = 2, ProductID = 2 },
+               new CustomerProduct() { CustomerProductID = 6, CustomerID = 3, ProductID = 1 },
+               new CustomerProduct() { CustomerProductID = 7, CustomerID = 3, ProductID = 3 });
 
             base.OnModelCreating(modelBuilder);
         }

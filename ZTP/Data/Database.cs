@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZTP.Models;
 
 namespace ZTP
 {
@@ -59,5 +61,72 @@ namespace ZTP
                 return customer;
             }
         }*/
+
+        #region GetAll Methods
+
+        public IEnumerable<Product> GetAllProducts()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var products = context.Products.ToList();
+                return products;
+            }
+        }
+
+        public IEnumerable<Customer> GetAllCustomers()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var customers= context.Customers.ToList();
+                return customers;
+            }
+        }
+
+        public IEnumerable<ShippingMethod> GetAllShippingMethods()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var shippingMethods = context.ShippingMethods.ToList();
+                return shippingMethods;
+            }
+        }
+
+        public IEnumerable<PaymentMethod> GetAllPaymentMethods()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var paymentMethods = context.PaymentMethods.ToList();
+                return paymentMethods;
+            }
+        }
+
+        public IEnumerable<Order> GetAllOrders()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var orders = context.Orders.Include(o => o.Customer).Include(o => o.ShippingMethod).Include(o => o.PaymentMethod).ToList();
+                return orders;
+            }
+        }
+
+        public IEnumerable<ProductOrder> GetAllProductOrders()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var productOrders = context.ProductOrders.Include(po => po.Order).Include(po => po.Product).ToList();
+                return productOrders;
+            }
+        }
+
+        public IEnumerable<CustomerProduct> GetAllCustomerProducts()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var customerProducts = context.CustomerProducts.Include(cp => cp.Customer).Include(cp => cp.Product).ToList();
+                return customerProducts;
+            }
+        }
+
+        #endregion
     }
 }

@@ -48,9 +48,9 @@
                         </ListBox>
                     </Grid>
 
-                    <StackPanel Grid.Column="1" Grid.Row="1">
-                        <Image Name="image_CurrentProduct" Width="160" Height="90" Source="img/DefaultImage.jpg" Margin="5"/>
-                        <Grid>
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
+                        <!--<Image Name="image_CurrentProduct" Width="160" Height="90" Source="img/DefaultImage.jpg" Margin="5"/>-->
+                        <Grid DataContext="{Binding ElementName=listBox_ProductsList, Path=SelectedItem}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -65,17 +65,17 @@
                             </Grid.RowDefinitions>
 
                             <Label Content="Name" Margin="5" />
-                            <TextBox Name="TextBox_Name" Grid.Column="1" Padding="5" Margin="5"/>
-                            <Label Content="Image" Grid.Row="1" Margin="5" />
-                            <TextBox Name="TextBox_Image" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5"/>
+                            <TextBox Name="TextBox_Name" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Name}"/>
+                            <!--<Label Content="Image" Grid.Row="1" Margin="5" />
+                            <TextBox Name="TextBox_Image" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Image}"/>-->
                             <Label Content="VAT"  Grid.Row="2" Margin="5" />
-                            <TextBox Name="TextBox_VAT" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5"/>
+                            <TextBox Name="TextBox_VAT" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=VAT}"/>
                             <Label Content="Price" Grid.Row="3" Margin="5" />
-                            <TextBox Name="TextBox_Price" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5"/>
+                            <TextBox Name="TextBox_Price" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Price}"/>
                             <Label Content="Quantity" Grid.Row="4" Margin="5" />
-                            <TextBox Name="TextBox_Quantity" Grid.Row="4" Grid.Column="1" Padding="5" Margin="5"/>
+                            <TextBox Name="TextBox_Quantity" Grid.Row="4" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Quantity}"/>
                             <Label Content="Promotion" Grid.Row="5" Margin="5" />
-                            <CheckBox Name="CheckBox_Promotion" Grid.Row="5" Grid.Column="1" Padding="5" Margin="5"/>
+                            <CheckBox Name="CheckBox_Promotion" Grid.Row="5" Grid.Column="1" Padding="5" Margin="5" IsChecked="{Binding Path=Promotion}"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
@@ -135,7 +135,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel>
+                    <StackPanel VerticalAlignment="Center">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -150,10 +150,10 @@
 
                             <Label Content="Shipping Method" Margin="5" />
                             <ComboBox Name="comboBox_ShippingMethod" Grid.Column="1" Padding="5" Margin="5" SelectedIndex="0" 
-                                      ItemsSource="{Binding shippingMethodsList}"/>
+                                      ItemsSource="{Binding shippingMethodsList}" DisplayMemberPath="Name"/>
                             <Label Content="Payment Method" Grid.Row="1" Margin="5" />
                             <ComboBox Name="comboBox_PaymentMethod" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5" SelectedIndex="0" 
-                                      ItemsSource="{Binding paymentMethodsList}"/>
+                                      ItemsSource="{Binding paymentMethodsList}" DisplayMemberPath="Name"/>
                             <Label Content="Make invoice in pdf"  Grid.Row="2" Margin="5" />
                             <CheckBox Name="checkBox_InvoicePDF" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5"/>
                             <Label Content="Make invoice in xml" Grid.Row="3" Margin="5" />
@@ -231,7 +231,7 @@
                         </ListBox>
                     </Grid>
 
-                    <StackPanel Grid.Column="1" Grid.Row="1">
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
                         <Label Content="Customer data" HorizontalAlignment="Center" FontWeight="Bold"></Label>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -279,14 +279,14 @@
                         </Grid.RowDefinitions>
 
                         <ListBox Name="listBox_OrdersList" 
-                             ItemsSource="{Binding ordersList}" DisplayMemberPath="Name"
+                             ItemsSource="{Binding ordersList}" DisplayMemberPath="OrderID"
                              Padding="5" Margin="5" SelectionChanged="listBox_OrdersList_SelectionChanged" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
                              ScrollViewer.CanContentScroll="False">
                         </ListBox>
 
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1" DataContext="{Binding ElementName=listBox_OrdersList, Path=SelectedItem}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -294,7 +294,8 @@
 
                             <Label Content="Order Status" Grid.Row="1" Margin="5" />
                             <ComboBox Grid.Column="1" Name="comboBox_OrderStatus" Padding="5" Margin="5" SelectedIndex="0" 
-                                      ItemsSource="{Binding paymentMethodsList}"/>
+                                      SelectedValue="{Binding OrderStatus}">
+                            </ComboBox>
                         </Grid>
                     </Grid>
 

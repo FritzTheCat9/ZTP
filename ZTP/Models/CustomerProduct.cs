@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace ZTP.Models
 {
-    public class ProductOrder
+    public class CustomerProduct
     {
         /* POLA */
         [Key]
-        [Display(Name = "ProductZamowienieId")]
-        public int ProductOrderID { get; set; }
+        [Display(Name = "KlientProduktID")]
+        public int CustomerProductID { get; set; }
+        [Required]
+        [ForeignKey("Customer")]
+        [Display(Name = "KlientId")]
+        public int CustomerID { get; set; }
         [Required]
         [ForeignKey("Product")]
         [Display(Name = "ProduktId")]
         public int ProductID { get; set; }
-        [Required]
-        [ForeignKey("Order")]
-        [Display(Name = "ZamowienieId")]
-        public int OrderID { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
-        [Display(Name = "ZamowienieId")]
-        public Order Order { get; set; }
+        [Display(Name = "KlientId")]
+        public Customer Customer { get; set; }
         [Display(Name = "ProduktId")]
         public Product Product { get; set; }
     }

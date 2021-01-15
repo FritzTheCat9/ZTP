@@ -9,7 +9,7 @@ using ZTP;
 namespace ZTP.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210115201855_migracja")]
+    [Migration("20210115221155_migracja")]
     partial class migracja
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace ZTP.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ZTP.Customer", b =>
+            modelBuilder.Entity("ZTP.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerID")
                         .ValueGeneratedOnAdd()
@@ -80,7 +80,73 @@ namespace ZTP.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ZTP.Order", b =>
+            modelBuilder.Entity("ZTP.Models.CustomerProduct", b =>
+                {
+                    b.Property<int>("CustomerProductID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CustomerProductID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("CustomerProducts");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerProductID = 1,
+                            CustomerID = 1,
+                            ProductID = 1
+                        },
+                        new
+                        {
+                            CustomerProductID = 2,
+                            CustomerID = 1,
+                            ProductID = 2
+                        },
+                        new
+                        {
+                            CustomerProductID = 3,
+                            CustomerID = 1,
+                            ProductID = 3
+                        },
+                        new
+                        {
+                            CustomerProductID = 4,
+                            CustomerID = 2,
+                            ProductID = 1
+                        },
+                        new
+                        {
+                            CustomerProductID = 5,
+                            CustomerID = 2,
+                            ProductID = 2
+                        },
+                        new
+                        {
+                            CustomerProductID = 6,
+                            CustomerID = 3,
+                            ProductID = 1
+                        },
+                        new
+                        {
+                            CustomerProductID = 7,
+                            CustomerID = 3,
+                            ProductID = 3
+                        });
+                });
+
+            modelBuilder.Entity("ZTP.Models.Order", b =>
                 {
                     b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd()
@@ -160,7 +226,7 @@ namespace ZTP.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ZTP.PaymentMethod", b =>
+            modelBuilder.Entity("ZTP.Models.PaymentMethod", b =>
                 {
                     b.Property<int>("PaymentMethodID")
                         .ValueGeneratedOnAdd()
@@ -193,16 +259,12 @@ namespace ZTP.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ZTP.Product", b =>
+            modelBuilder.Entity("ZTP.Models.Product", b =>
                 {
                     b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -228,7 +290,6 @@ namespace ZTP.Migrations
                         new
                         {
                             ProductID = 1,
-                            Image = "~/Images/Laptop LENOVO.jpg",
                             Name = "Laptop LENOVO",
                             Price = 4300m,
                             Promotion = false,
@@ -238,7 +299,6 @@ namespace ZTP.Migrations
                         new
                         {
                             ProductID = 2,
-                            Image = "~/Images/Laptop HUAWEI.png",
                             Name = "Laptop HUAWEI",
                             Price = 5000m,
                             Promotion = false,
@@ -248,7 +308,6 @@ namespace ZTP.Migrations
                         new
                         {
                             ProductID = 3,
-                            Image = "~/Images/Smartfon HUAWEI P30.jpg",
                             Name = "Smartfon HUAWEI P30",
                             Price = 2999m,
                             Promotion = true,
@@ -257,7 +316,7 @@ namespace ZTP.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ZTP.ProductOrder", b =>
+            modelBuilder.Entity("ZTP.Models.ProductOrder", b =>
                 {
                     b.Property<int>("ProductOrderID")
                         .ValueGeneratedOnAdd()
@@ -317,7 +376,7 @@ namespace ZTP.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ZTP.ShippingMethod", b =>
+            modelBuilder.Entity("ZTP.Models.ShippingMethod", b =>
                 {
                     b.Property<int>("ShippingMethodID")
                         .ValueGeneratedOnAdd()
@@ -350,36 +409,51 @@ namespace ZTP.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ZTP.Order", b =>
+            modelBuilder.Entity("ZTP.Models.CustomerProduct", b =>
                 {
-                    b.HasOne("ZTP.Customer", "Customer")
+                    b.HasOne("ZTP.Models.Customer", "Customer")
+                        .WithMany("CustomerProducts")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZTP.Models.Product", "Product")
+                        .WithMany("CustomerProducts")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ZTP.Models.Order", b =>
+                {
+                    b.HasOne("ZTP.Models.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ZTP.PaymentMethod", "PaymentMethod")
+                    b.HasOne("ZTP.Models.PaymentMethod", "PaymentMethod")
                         .WithMany("Orders")
                         .HasForeignKey("PaymentMethodID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ZTP.ShippingMethod", "ShippingMethod")
+                    b.HasOne("ZTP.Models.ShippingMethod", "ShippingMethod")
                         .WithMany("Orders")
                         .HasForeignKey("ShippingMethodID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ZTP.ProductOrder", b =>
+            modelBuilder.Entity("ZTP.Models.ProductOrder", b =>
                 {
-                    b.HasOne("ZTP.Order", "Order")
+                    b.HasOne("ZTP.Models.Order", "Order")
                         .WithMany("ProductOrders")
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ZTP.Product", "Product")
+                    b.HasOne("ZTP.Models.Product", "Product")
                         .WithMany("ProductOrders")
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)

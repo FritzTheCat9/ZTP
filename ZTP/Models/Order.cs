@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZTP
+namespace ZTP.Models
 {
     public enum State
     {
@@ -50,5 +50,7 @@ namespace ZTP
         [Display(Name = "Płatność")]
         public PaymentMethod PaymentMethod { get; set; }
         public ICollection<ProductOrder> ProductOrders { get; set; } = new ObservableCollection<ProductOrder>();
+
+        /* METODY */
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZTP
+namespace ZTP.Models
 {
     public class Product
     {
@@ -25,9 +25,9 @@ namespace ZTP
         /*[Required]
         [Display(Name = "Opis")]
         public string Description { get; set; }*/
-        [Required]
+        /*[Required]
         [Display(Name = "Obraz")]
-        public string Image { get; set; }
+        public string Image { get; set; }*/
         /*[Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -51,5 +51,6 @@ namespace ZTP
         /*[Display(Name = "KategoriaId")]
         public Category Category { get; set; }*/
         public ICollection<ProductOrder> ProductOrders { get; set; } = new ObservableCollection<ProductOrder>();
+        public ICollection<CustomerProduct> CustomerProducts { get; set; } = new ObservableCollection<CustomerProduct>();
     }
 }

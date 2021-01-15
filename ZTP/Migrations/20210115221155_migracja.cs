@@ -43,7 +43,6 @@ namespace ZTP.Migrations
                     ProductID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
-                    Image = table.Column<string>(nullable: false),
                     Promotion = table.Column<bool>(nullable: false),
                     VAT = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -65,6 +64,32 @@ namespace ZTP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ShippingMethods", x => x.ShippingMethodID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustomerProducts",
+                columns: table => new
+                {
+                    CustomerProductID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerID = table.Column<int>(nullable: false),
+                    ProductID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerProducts", x => x.CustomerProductID);
+                    table.ForeignKey(
+                        name: "FK_CustomerProducts_Customers_CustomerID",
+                        column: x => x.CustomerID,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CustomerProducts_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ProductID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -150,12 +175,12 @@ namespace ZTP.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ProductID", "Image", "Name", "Price", "Promotion", "Quantity", "VAT" },
+                columns: new[] { "ProductID", "Name", "Price", "Promotion", "Quantity", "VAT" },
                 values: new object[,]
                 {
-                    { 1, "~/Images/Laptop LENOVO.jpg", "Laptop LENOVO", 4300m, false, 20, 23 },
-                    { 2, "~/Images/Laptop HUAWEI.png", "Laptop HUAWEI", 5000m, false, 59, 23 },
-                    { 3, "~/Images/Smartfon HUAWEI P30.jpg", "Smartfon HUAWEI P30", 2999m, true, 67, 23 }
+                    { 1, "Laptop LENOVO", 4300m, false, 20, 23 },
+                    { 2, "Laptop HUAWEI", 5000m, false, 59, 23 },
+                    { 3, "Smartfon HUAWEI P30", 2999m, true, 67, 23 }
                 });
 
             migrationBuilder.InsertData(
@@ -166,6 +191,20 @@ namespace ZTP.Migrations
                     { 1, "Kurier UPS" },
                     { 2, "Kurier DPD" },
                     { 3, "Poczta Polska" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CustomerProducts",
+                columns: new[] { "CustomerProductID", "CustomerID", "ProductID" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 4, 2, 1 },
+                    { 6, 3, 1 },
+                    { 2, 1, 2 },
+                    { 5, 2, 2 },
+                    { 3, 1, 3 },
+                    { 7, 3, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -192,6 +231,16 @@ namespace ZTP.Migrations
                     { 5, 5, 1 },
                     { 6, 5, 2 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomerProducts_CustomerID",
+                table: "CustomerProducts",
+                column: "CustomerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomerProducts_ProductID",
+                table: "CustomerProducts",
+                column: "ProductID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerID",
@@ -221,6 +270,9 @@ namespace ZTP.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CustomerProducts");
+
             migrationBuilder.DropTable(
                 name: "ProductOrders");
 

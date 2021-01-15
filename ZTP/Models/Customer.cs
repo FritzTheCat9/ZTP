@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZTP
+namespace ZTP.Models
 {
     public class Customer
     {
@@ -38,6 +38,7 @@ namespace ZTP
         /*[Display(Name = "AdresId")]
         public Address Address { get; set; }*/
         public ICollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
+        public ICollection<CustomerProduct> CustomerProducts { get; set; } = new ObservableCollection<CustomerProduct>();
 
         /* METODY */
     }
