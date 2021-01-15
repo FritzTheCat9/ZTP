@@ -33,6 +33,10 @@ namespace ZTP
                 Close();
                 mainWindow.ShowDialog();
             }
+
+            /*Address address = new Address { Town="asd", Street="asd", PostCode="asd", Country="asd", HouseNumber=123 };
+            Customer customer = new Customer { FirstName = "FirstName", LastName = "LastName", Login = "Login", Password = "Password", AdminRights = true, Address = address };
+            Database.GetInstance().AddCustomer(customer);*/
         }
     }
 }

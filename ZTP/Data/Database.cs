@@ -50,5 +50,14 @@ namespace ZTP
                 return null;
             }
         }
+
+        /*public Customer AddCustomer(Customer customer)
+        {
+            using (var context = new DatabaseContext())
+            {
+                context.Customers.Add(customer);
+                return customer;
+            }
+        }*/
     }
 }

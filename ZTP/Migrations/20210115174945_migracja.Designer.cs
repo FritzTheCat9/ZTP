@@ -10,7 +10,7 @@ using ZTP;
 namespace ZTP.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210111173805_migracja")]
+    [Migration("20210115174945_migracja")]
     partial class migracja
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,109 +21,12 @@ namespace ZTP.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ZTP.Address", b =>
-                {
-                    b.Property<int>("AddressID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HouseNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PostCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Town")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AddressID");
-
-                    b.ToTable("Addresses");
-
-                    b.HasData(
-                        new
-                        {
-                            AddressID = 1,
-                            Country = "Polska",
-                            CustomerID = 1,
-                            HouseNumber = 12,
-                            PostCode = "12-123",
-                            Street = "Miła",
-                            Town = "Białystok"
-                        },
-                        new
-                        {
-                            AddressID = 2,
-                            Country = "Polska",
-                            CustomerID = 2,
-                            HouseNumber = 32,
-                            PostCode = "23-543",
-                            Street = "Piękna",
-                            Town = "Łomża"
-                        },
-                        new
-                        {
-                            AddressID = 3,
-                            Country = "Polska",
-                            CustomerID = 3,
-                            HouseNumber = 43,
-                            PostCode = "56-765",
-                            Street = "Bursztynowa",
-                            Town = "Gdańsk"
-                        });
-                });
-
-            modelBuilder.Entity("ZTP.Category", b =>
-                {
-                    b.Property<int>("CategoryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryID");
-
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryID = 1,
-                            Name = "Laptopy"
-                        },
-                        new
-                        {
-                            CategoryID = 2,
-                            Name = "Smartfony"
-                        });
-                });
-
             modelBuilder.Entity("ZTP.Customer", b =>
                 {
                     b.Property<int>("CustomerID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AddressID")
-                        .HasColumnType("int");
 
                     b.Property<bool>("AdminRights")
                         .HasColumnType("bit");
@@ -146,15 +49,12 @@ namespace ZTP.Migrations
 
                     b.HasKey("CustomerID");
 
-                    b.HasIndex("AddressID");
-
                     b.ToTable("Customers");
 
                     b.HasData(
                         new
                         {
                             CustomerID = 1,
-                            AddressID = 1,
                             AdminRights = true,
                             FirstName = "Jan",
                             LastName = "Kowalski",
@@ -164,7 +64,6 @@ namespace ZTP.Migrations
                         new
                         {
                             CustomerID = 2,
-                            AddressID = 2,
                             AdminRights = false,
                             FirstName = "Robert",
                             LastName = "Nowak",
@@ -174,7 +73,6 @@ namespace ZTP.Migrations
                         new
                         {
                             CustomerID = 3,
-                            AddressID = 3,
                             AdminRights = false,
                             FirstName = "Krzysztof",
                             LastName = "Piekarski",
@@ -303,9 +201,6 @@ namespace ZTP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
 
@@ -335,15 +230,12 @@ namespace ZTP.Migrations
 
                     b.HasKey("ProductID");
 
-                    b.HasIndex("CategoryID");
-
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             ProductID = 1,
-                            CategoryID = 1,
                             DateAdded = new DateTime(2018, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Dobry laptop LENOVO",
                             Image = "~/Images/Laptop LENOVO.jpg",
@@ -356,7 +248,6 @@ namespace ZTP.Migrations
                         new
                         {
                             ProductID = 2,
-                            CategoryID = 1,
                             DateAdded = new DateTime(2019, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Dobry laptop HUAWEI",
                             Image = "~/Images/Laptop HUAWEI.png",
@@ -369,7 +260,6 @@ namespace ZTP.Migrations
                         new
                         {
                             ProductID = 3,
-                            CategoryID = 2,
                             DateAdded = new DateTime(2017, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Dobry smartfon HUAWEI P30",
                             Image = "~/Images/Smartfon HUAWEI P30.jpg",
@@ -474,15 +364,6 @@ namespace ZTP.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ZTP.Customer", b =>
-                {
-                    b.HasOne("ZTP.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ZTP.Order", b =>
                 {
                     b.HasOne("ZTP.Customer", "Customer")
@@ -500,15 +381,6 @@ namespace ZTP.Migrations
                     b.HasOne("ZTP.ShippingMethod", "ShippingMethod")
                         .WithMany("Orders")
                         .HasForeignKey("ShippingMethodID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ZTP.Product", b =>
-                {
-                    b.HasOne("ZTP.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

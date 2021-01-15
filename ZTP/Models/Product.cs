@@ -15,10 +15,10 @@ namespace ZTP
         [Key]
         [Display(Name = "ProduktId")]
         public int ProductID { get; set; }
-        [Required]
+        /*[Required]
         [ForeignKey("Category")]
         [Display(Name = "KategoriaId")]
-        public int CategoryID { get; set; }
+        public int CategoryID { get; set; }*/
         [Required]
         [Display(Name = "Nazwa")]
         public string Name { get; set; }
@@ -48,8 +48,8 @@ namespace ZTP
         public int Quantity { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
-        [Display(Name = "KategoriaId")]
-        public Category Category { get; set; }
+        /*[Display(Name = "KategoriaId")]
+        public Category Category { get; set; }*/
         public ICollection<ProductOrder> ProductOrders { get; set; } = new ObservableCollection<ProductOrder>();
     }
 }

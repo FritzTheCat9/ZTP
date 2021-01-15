@@ -14,10 +14,10 @@ namespace ZTP
         /* POLA */
         [Key]
         public int CustomerID { get; set; }
-        [Required]
+        /*[Required]
         [ForeignKey("Address")]
         [Display(Name = "AdresId")]
-        public int AddressID { get; set; }
+        public int AddressID { get; set; }*/
         [Required]
         [Display(Name = "Imie")]
         public string FirstName { get; set; }
@@ -35,8 +35,8 @@ namespace ZTP
         public bool AdminRights { get; set; }
 
         /* POLA - ENTITY FRAMEWORK */
-        [Display(Name = "AdresId")]
-        public Address Address { get; set; }
+        /*[Display(Name = "AdresId")]
+        public Address Address { get; set; }*/
         public ICollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
 
         /* METODY */
