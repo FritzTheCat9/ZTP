@@ -24,5 +24,60 @@ namespace ZTP
         {
             InitializeComponent();
         }
+
+        private void MenuItem_AddProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_EditProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_DeleteProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_AddToCart_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Observe_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void listBox_ProductsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_AddBubbleWrap_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_AddCardboardBox_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_AddPlasticBox_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void listBox_ShoppingCartList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void button_Order_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

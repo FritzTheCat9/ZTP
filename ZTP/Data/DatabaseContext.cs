@@ -52,9 +52,9 @@ namespace ZTP
                new Category() { CategoryID = 2, Name = "Smartfony" });*/
 
             modelBuilder.Entity<Product>().HasData(
-                new Product() { ProductID = 1, /*CategoryID = 1,*/ Name = "Laptop LENOVO", Description = "Dobry laptop LENOVO", Image = "~/Images/Laptop LENOVO.jpg", DateAdded = new DateTime(2018, 3, 20), Promotion = false, VAT = 23, Price = 4300, Quantity = 20 },
-                new Product() { ProductID = 2, /*CategoryID = 1,*/ Name = "Laptop HUAWEI", Description = "Dobry laptop HUAWEI", Image = "~/Images/Laptop HUAWEI.png", DateAdded = new DateTime(2019, 10, 13), Promotion = false, VAT = 23, Price = 5000, Quantity = 59 },
-                new Product() { ProductID = 3, /*CategoryID = 2,*/ Name = "Smartfon HUAWEI P30", Description = "Dobry smartfon HUAWEI P30", Image = "~/Images/Smartfon HUAWEI P30.jpg", DateAdded = new DateTime(2017, 9, 9), Promotion = true, VAT = 23, Price = 2999, Quantity = 67 });
+                new Product() { ProductID = 1, /*CategoryID = 1,*/ Name = "Laptop LENOVO", /*Description = "Dobry laptop LENOVO",*/ Image = "~/Images/Laptop LENOVO.jpg", /*DateAdded = new DateTime(2018, 3, 20), Promotion = false,*/ VAT = 23, Price = 4300, Quantity = 20 },
+                new Product() { ProductID = 2, /*CategoryID = 1,*/ Name = "Laptop HUAWEI", /*Description = "Dobry laptop HUAWEI",*/ Image = "~/Images/Laptop HUAWEI.png", /*DateAdded = new DateTime(2019, 10, 13), Promotion = false,*/ VAT = 23, Price = 5000, Quantity = 59 },
+                new Product() { ProductID = 3, /*CategoryID = 2,*/ Name = "Smartfon HUAWEI P30", /*Description = "Dobry smartfon HUAWEI P30",*/ Image = "~/Images/Smartfon HUAWEI P30.jpg", /*DateAdded = new DateTime(2017, 9, 9), Promotion = true,*/ VAT = 23, Price = 2999, Quantity = 67 });
 
             modelBuilder.Entity<Order>().HasData(
                 new Order() { OrderID = 1, CustomerID = 1, ShippingMethodID = 1, PaymentMethodID = 3, OrderStatus = State.Preparing, Price = 4300 },

@@ -22,20 +22,20 @@ namespace ZTP
         [Required]
         [Display(Name = "Nazwa")]
         public string Name { get; set; }
-        [Required]
+        /*[Required]
         [Display(Name = "Opis")]
-        public string Description { get; set; }
+        public string Description { get; set; }*/
         [Required]
         [Display(Name = "Obraz")]
         public string Image { get; set; }
-        [Required]
+        /*[Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data dodania")]
-        public DateTime DateAdded { get; set; }
-        [Required]
+        public DateTime DateAdded { get; set; }*/
+        /*[Required]
         [Display(Name = "Promocja")]
-        public bool Promotion { get; set; }
+        public bool Promotion { get; set; }*/
         [Required]
         [Display(Name = "VAT")]
         public int VAT { get; set; }
