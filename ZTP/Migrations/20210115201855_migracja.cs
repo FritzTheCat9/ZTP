@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ZTP.Migrations
 {
@@ -44,9 +43,7 @@ namespace ZTP.Migrations
                     ProductID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
                     Image = table.Column<string>(nullable: false),
-                    DateAdded = table.Column<DateTime>(nullable: false),
                     Promotion = table.Column<bool>(nullable: false),
                     VAT = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -153,12 +150,12 @@ namespace ZTP.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ProductID", "DateAdded", "Description", "Image", "Name", "Price", "Promotion", "Quantity", "VAT" },
+                columns: new[] { "ProductID", "Image", "Name", "Price", "Promotion", "Quantity", "VAT" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2018, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Dobry laptop LENOVO", "~/Images/Laptop LENOVO.jpg", "Laptop LENOVO", 4300m, false, 20, 23 },
-                    { 2, new DateTime(2019, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Dobry laptop HUAWEI", "~/Images/Laptop HUAWEI.png", "Laptop HUAWEI", 5000m, false, 59, 23 },
-                    { 3, new DateTime(2017, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Dobry smartfon HUAWEI P30", "~/Images/Smartfon HUAWEI P30.jpg", "Smartfon HUAWEI P30", 2999m, true, 67, 23 }
+                    { 1, "~/Images/Laptop LENOVO.jpg", "Laptop LENOVO", 4300m, false, 20, 23 },
+                    { 2, "~/Images/Laptop HUAWEI.png", "Laptop HUAWEI", 5000m, false, 59, 23 },
+                    { 3, "~/Images/Smartfon HUAWEI P30.jpg", "Smartfon HUAWEI P30", 2999m, true, 67, 23 }
                 });
 
             migrationBuilder.InsertData(

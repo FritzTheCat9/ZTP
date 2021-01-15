@@ -33,9 +33,9 @@ namespace ZTP
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data dodania")]
         public DateTime DateAdded { get; set; }*/
-        /*[Required]
+        [Required]
         [Display(Name = "Promocja")]
-        public bool Promotion { get; set; }*/
+        public bool Promotion { get; set; }
         [Required]
         [Display(Name = "VAT")]
         public int VAT { get; set; }

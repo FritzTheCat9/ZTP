@@ -25,6 +25,8 @@ namespace ZTP
             InitializeComponent();
         }
 
+        #region Product list
+
         private void MenuItem_AddProduct_Click(object sender, RoutedEventArgs e)
         {
 
@@ -55,6 +57,10 @@ namespace ZTP
 
         }
 
+        #endregion
+
+        #region Shopping cart
+
         private void MenuItem_AddBubbleWrap_Click(object sender, RoutedEventArgs e)
         {
 
@@ -75,10 +81,18 @@ namespace ZTP
 
         }
 
+        #endregion
+
+        #region Order
+
         private void button_Order_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        #endregion
+
+        #region Customer
 
         private void MenuItem_UnsubscribeProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -90,6 +104,10 @@ namespace ZTP
 
         }
 
+        #endregion
+
+        #region Admin
+
         private void listBox_OrdersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -99,5 +117,7 @@ namespace ZTP
         {
 
         }
+
+        #endregion
     }
 }

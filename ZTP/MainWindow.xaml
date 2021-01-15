@@ -61,6 +61,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <Label Content="Name" Margin="5" />
@@ -73,6 +74,8 @@
                             <TextBox Name="TextBox_Price" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5"/>
                             <Label Content="Quantity" Grid.Row="4" Margin="5" />
                             <TextBox Name="TextBox_Quantity" Grid.Row="4" Grid.Column="1" Padding="5" Margin="5"/>
+                            <Label Content="Promotion" Grid.Row="5" Margin="5" />
+                            <CheckBox Name="CheckBox_Promotion" Grid.Row="5" Grid.Column="1" Padding="5" Margin="5"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
