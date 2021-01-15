@@ -20,16 +20,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel>
-                        <Menu Margin="5" Padding="5">
-                            <MenuItem Name="MenuItem_AddProduct" Header="Add" Click="MenuItem_AddProduct_Click"/>
-                            <MenuItem Name="MenuItem_EditProduct" Header="Edit" Click="MenuItem_EditProduct_Click"/>
-                            <MenuItem Name="MenuItem_DeleteProduct" Header="Delete" Click="MenuItem_DeleteProduct_Click"/>
-                            <Separator/>
-                            <MenuItem Name="MenuItem_AddToCart" Header="Add to cart" Click="MenuItem_AddToCart_Click"/>
-                            <MenuItem Name="MenuItem_Observe" Header="Observe" Click="MenuItem_Observe_Click"/>
-                        </Menu>
-                    </StackPanel>
+                    <Label Content="Products list" HorizontalAlignment="Center" FontWeight="Bold"></Label>
 
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
@@ -37,7 +28,16 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="Products list" HorizontalAlignment="Center" FontWeight="Bold"></Label>
+                        <StackPanel>
+                            <Menu Margin="5" Padding="5">
+                                <MenuItem Name="MenuItem_AddProduct" Header="Add" Click="MenuItem_AddProduct_Click"/>
+                                <MenuItem Name="MenuItem_EditProduct" Header="Edit" Click="MenuItem_EditProduct_Click"/>
+                                <MenuItem Name="MenuItem_DeleteProduct" Header="Delete" Click="MenuItem_DeleteProduct_Click"/>
+                                <Separator/>
+                                <MenuItem Name="MenuItem_AddToCart" Header="Add to cart" Click="MenuItem_AddToCart_Click"/>
+                                <MenuItem Name="MenuItem_Observe" Header="Observe" Click="MenuItem_Observe_Click"/>
+                            </Menu>
+                        </StackPanel>
 
                         <ListBox Grid.Row="1" Name="listBox_ProductsList" 
                              ItemsSource="{Binding productsList}" DisplayMemberPath="Name"
@@ -90,15 +90,15 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0">
+                    <Label Content="Products in shopping cart" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
+
+                    <StackPanel Grid.Row="1">
                         <Menu Margin="5" Padding="5">
                             <MenuItem Name="MenuItem_AddBubbleWrap" Header="Add bubble wrap" Click="MenuItem_AddBubbleWrap_Click"/>
                             <MenuItem Name="MenuItem_AddCardboardBox" Header="Add cardboard box" Click="MenuItem_AddCardboardBox_Click"/>
                             <MenuItem Name="MenuItem_AddPlasticBox" Header="Add plastic box" Click="MenuItem_AddPlasticBox_Click"/>
                         </Menu>
                     </StackPanel>
-
-                    <Label Grid.Row="1" Content="Products in shopping cart:" FontWeight="Bold"></Label>
 
                     <ListBox Grid.Row="2" Name="listBox_ShoppingCartList" 
                              ItemsSource="{Binding shoppingCartList}" DisplayMemberPath="Name"
@@ -108,7 +108,7 @@
                              ScrollViewer.CanContentScroll="False">
                     </ListBox>
 
-                    <Label Grid.Column="1" Content="Added products packages:" FontWeight="Bold"></Label>
+                    <Label Grid.Column="1" Content="Added products packages" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
 
                     <ListBox Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Name="listBox_addedPackages" 
                              ItemsSource="{Binding addedPackagesList}" DisplayMemberPath="Name"
@@ -164,7 +164,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="Products in shopping cart:" FontWeight="Bold"></Label>
+                        <Label Content="Products in shopping cart" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
                         <ListBox Name="listBox_OrderProductList" Grid.Row="1"
                              ItemsSource="{Binding shoppingCartList}" DisplayMemberPath="Name"
                              Padding="5" Margin="5"
@@ -180,7 +180,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="Added products packages:" FontWeight="Bold"></Label>
+                        <Label Content="Added products packages" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
                         <ListBox Name="listBox_OrderPackagesList" Grid.Row="1"
                              ItemsSource="{Binding addedPackagesList}" DisplayMemberPath="Name"
                              Padding="5" Margin="5"
@@ -194,7 +194,124 @@
                             Margin="5" Padding="5" Width="80" Click="button_Order_Click"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Customer" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Watched products list" HorizontalAlignment="Center" FontWeight="Bold"></Label>
+
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Menu Margin="5" Padding="5">
+                            <MenuItem Name="MenuItem_UnsubscribeProduct" Header="Unsubscribe product" Click="MenuItem_UnsubscribeProduct_Click"/>
+                        </Menu>
+
+                        <ListBox Grid.Row="1"  Name="listBox_SubscribedProductsList" 
+                             ItemsSource="{Binding subscribedProductsList}" DisplayMemberPath="Name"
+                             Padding="5" Margin="5" SelectionChanged="listBox_SubscribedProductsList_SelectionChanged" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                             ScrollViewer.CanContentScroll="False">
+                        </ListBox>
+                    </Grid>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <Label Content="Customer data" HorizontalAlignment="Center" FontWeight="Bold"></Label>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="FirstName" Margin="5" />
+                            <TextBox Name="TextBox_FirstName" Grid.Column="1" Padding="5" Margin="5"/>
+                            <Label Content="LastName" Grid.Row="1" Margin="5" />
+                            <TextBox Name="TextBox_LastName" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5"/>
+                            <Label Content="Login"  Grid.Row="2" Margin="5" />
+                            <TextBox Name="TextBox_Login" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5"/>
+                            <Label Content="Password" Grid.Row="3" Margin="5" />
+                            <TextBox Name="TextBox_Password" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Admin" Padding="5" Height="28" VerticalAlignment="Top">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Orders list" HorizontalAlignment="Center" FontWeight="Bold"></Label>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ListBox Name="listBox_OrdersList" 
+                             ItemsSource="{Binding ordersList}" DisplayMemberPath="Name"
+                             Padding="5" Margin="5" SelectionChanged="listBox_OrdersList_SelectionChanged" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                             ScrollViewer.CanContentScroll="False">
+                        </ListBox>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Order Status" Grid.Row="1" Margin="5" />
+                            <ComboBox Grid.Column="1" Name="comboBox_OrderStatus" Padding="5" Margin="5" SelectedIndex="0" 
+                                      ItemsSource="{Binding paymentMethodsList}"/>
+                        </Grid>
+                    </Grid>
+
+                    <Label Grid.Column="1" Content="Admin panel" HorizontalAlignment="Center" FontWeight="Bold"></Label>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Name="button_discountProducts" Content="Discount every 5th product" Margin="5" Padding="5" Click="button_discountProducts_Click"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

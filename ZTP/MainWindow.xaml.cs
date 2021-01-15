@@ -79,5 +79,25 @@ namespace ZTP
         {
 
         }
+
+        private void MenuItem_UnsubscribeProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void listBox_SubscribedProductsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void listBox_OrdersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void button_discountProducts_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
