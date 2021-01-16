@@ -154,10 +154,12 @@
                             <Label Content="Payment Method" Grid.Row="1" Margin="5" />
                             <ComboBox Name="comboBox_PaymentMethod" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5" SelectedIndex="0" 
                                       ItemsSource="{Binding paymentMethodsList}" DisplayMemberPath="Name"/>
-                            <Label Content="Make invoice in pdf"  Grid.Row="2" Margin="5" />
-                            <CheckBox Name="checkBox_InvoicePDF" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5"/>
-                            <Label Content="Make invoice in txt" Grid.Row="3" Margin="5" />
-                            <CheckBox Name="checkBox_InvoiceXML" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5"/>
+                            <Label Content="Make invoice in:" Grid.Row="2" Margin="5" />
+                            <ComboBox Grid.Column="1" Grid.Row="2" Name="comboBox_MakeInvoice" Padding="5" Margin="5" SelectedIndex="0" 
+                                      SelectionChanged="comboBox_MakeInvoice_SelectionChanged">
+                                <ComboBoxItem>TXT</ComboBoxItem>
+                                <ComboBoxItem>PDF</ComboBoxItem>
+                            </ComboBox>
                         </Grid>
                     </StackPanel>
 

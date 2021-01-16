@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SautinSoft.Document;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZTP.Models;
+using ZTP.Patterns;
 
 namespace ZTP
 {
@@ -39,6 +42,16 @@ namespace ZTP
         public IList<Product> shoppingCartList { get; set; } = new ObservableCollection<Product>();
         public IList<Product> subscribedProductsList { get; set; } = new ObservableCollection<Product>();
         //addedPackagesList - do dodania potem
+
+        /* BUILDER - PATTERN */
+        private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order)
+        {
+            invoiceBuilder.AddSellerInfo();
+            invoiceBuilder.AddCustomerInfo(order.Customer);
+            invoiceBuilder.AddPaymentMethodInfo(order.PaymentMethod);
+            invoiceBuilder.AddShippingMethodInfo(order.ShippingMethod);
+            invoiceBuilder.AddProductsInfo(shoppingCartList.ToList());
+        }
 
         public MainWindow(LoginWindow loginWindow)
         {
@@ -203,11 +216,42 @@ namespace ZTP
             var order = new Order { Customer = customer, ShippingMethod = shippingMethod, PaymentMethod = paymentMethod, OrderStatus = State.Preparing, Price = shoppingCartPrice };
             database.AddOrder(order);
 
+            ordersList.Add(order);
+
             foreach (var product in shoppingCartList)
             {
                 var newProductOrder = new ProductOrder { Order = order, Product = product };
                 database.AddProductOrder(newProductOrder);
             }
+
+            string workingDirectory = Environment.CurrentDirectory;
+            string solutionDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            string invoicesDirectory = solutionDirectory + @"\Invoices\";
+            var path = invoicesDirectory + order.OrderID + "_" + order.Customer.FirstName + "_" + order.Customer.LastName;
+
+            if (comboBox_MakeInvoice.SelectedIndex == 0)
+            {
+                InvoiceBuilderTxt invoiceBuilder = new InvoiceBuilderTxt();
+                constructInvoice(invoiceBuilder, order);
+                var invoiceText = invoiceBuilder.GetInvoiceInTxt();
+                path += ".txt";
+                File.WriteAllText(path, invoiceText);
+            }
+            else
+            {
+                InvoiceBuilderPdf invoiceBuilder = new InvoiceBuilderPdf();
+                constructInvoice(invoiceBuilder, order);
+                DocumentCore invoicePdf = invoiceBuilder.GetInvoiceInPdf();
+                path += ".pdf";
+                invoicePdf.Save(path);
+
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path) { UseShellExecute = true });
+            }
+        }
+
+        private void comboBox_MakeInvoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
 
         #endregion
