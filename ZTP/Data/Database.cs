@@ -135,13 +135,22 @@ namespace ZTP
             }
         }
 
-        public Product AddProduct(Product product)
+        #region Products Methods
+
+        public bool AddProduct(Product product)
         {
             using (var context = new DatabaseContext())
             {
-                context.Products.Add(product);
+                var newProduct = new Product { Name = product.Name, Promotion = product.Promotion, VAT = product.VAT, Price = product.Price, Quantity = product.Quantity };
+                var entity = context.Products.Attach(product);
+                entity.State = EntityState.Added;
                 context.SaveChanges();
-                return product;
+                return true;
+
+                /*var newProduct = new Product { Name = product.Name, Promotion = product.Promotion, VAT = product.VAT, Price = product.Price, Quantity = product.Quantity };
+                context.Products.Add(newProduct);
+                context.SaveChanges();
+                return true;*/
             }
         }
 
@@ -149,20 +158,32 @@ namespace ZTP
         {
             using (var context = new DatabaseContext())
             {
-                context.Products.Remove(product);
+                var entity = context.Products.Attach(product);
+                entity.State = EntityState.Deleted;
                 context.SaveChanges();
                 return true;
+
+                /*context.Products.Remove(product);
+                context.SaveChanges();
+                return true;*/
             }
         }
 
-        public Product UpdateProduct(Product product)
+        public bool UpdateProduct(Product product)
         {
             using (var context = new DatabaseContext())
             {
-                context.Products.Update(product);
+                var entity = context.Products.Attach(product);
+                entity.State = EntityState.Modified;
                 context.SaveChanges();
-                return product;
+                return true;
+
+                /*context.Products.Update(product);
+                context.SaveChanges();
+                return true;*/
             }
         }
+
+        #endregion
     }
 }

@@ -64,10 +64,12 @@ namespace ZTP
         private void MenuItem_AddProduct_Click(object sender, RoutedEventArgs e)
         {
             var product = new Product { Name = "New", Price = 0, Promotion = false, Quantity = 0, VAT = 23 };
-            productsList.Add(product);
-            listBox_ProductsList.SelectedIndex = productsList.Count;
-
-            database.AddProduct(product);
+            
+            if(database.AddProduct(product))
+            {
+                productsList.Add(product);
+                listBox_ProductsList.SelectedIndex = productsList.Count;
+            }
         }
 
         private void MenuItem_DeleteProduct_Click(object sender, RoutedEventArgs e)
@@ -84,9 +86,10 @@ namespace ZTP
                     }
                 }
 
-                productsList.Remove(product);
-
-                database.RemoveProduct(product);
+                if (database.RemoveProduct(product))
+                {
+                    productsList.Remove(product);
+                }
             }
         }
 
