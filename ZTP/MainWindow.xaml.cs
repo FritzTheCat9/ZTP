@@ -24,6 +24,7 @@ namespace ZTP
     {
         private Database database = Database.GetInstance();
         public Customer customer { get; set; } = null;
+        private decimal shoppingCartPrice { get; set; } = 0;
 
         /* LISTY Z BAZY DANYCH */
         public IList<Product> productsList { get; set; } = new ObservableCollection<Product>();
@@ -99,6 +100,8 @@ namespace ZTP
             {
                 var product = (Product)listBox_ProductsList.SelectedItem;
                 shoppingCartList.Add(product);
+
+                shoppingCartPrice += product.Price;
             }
         }
 
@@ -147,6 +150,8 @@ namespace ZTP
             {
                 var product = (Product)listBox_ShoppingCartList.SelectedItem;
                 shoppingCartList.Remove(product);
+
+                shoppingCartPrice -= product.Price;
             }
         }
 
@@ -161,7 +166,16 @@ namespace ZTP
 
         private void button_Order_Click(object sender, RoutedEventArgs e)
         {
+            var shippingMethod = (ShippingMethod)comboBox_ShippingMethod.SelectedItem;
+            var paymentMethod = (PaymentMethod)comboBox_PaymentMethod.SelectedItem;
+            var order = new Order { Customer = customer, ShippingMethod = shippingMethod, PaymentMethod = paymentMethod, OrderStatus = State.Preparing, Price = shoppingCartPrice };
+            database.AddOrder(order);
 
+            foreach (var product in shoppingCartList)
+            {
+                var newProductOrder = new ProductOrder { Order = order, Product = product };
+                database.AddProductOrder(newProductOrder);
+            }
         }
 
         #endregion
@@ -193,5 +207,7 @@ namespace ZTP
         }
 
         #endregion
+
+       
     }
 }

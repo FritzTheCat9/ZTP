@@ -119,21 +119,33 @@ namespace ZTP
         }
         #endregion
 
+        #region Order Methods
+
         public Order AddOrder(Order order)
         {
             using (var context = new DatabaseContext())
             {
-                var newOrder = new Order { Customer = order.Customer, ShippingMethod = order.ShippingMethod, PaymentMethod = order.PaymentMethod, Price = order.Price, OrderStatus = order.OrderStatus };
-                var customer = context.Customers.Find(newOrder.CustomerID);
-                var shippingMethod = context.ShippingMethods.Find(newOrder.ShippingMethodID);
-                var paymentMethod = context.PaymentMethods.Find(newOrder.PaymentMethodID);
-                customer.Orders.Add(newOrder);
-                shippingMethod.Orders.Add(newOrder);
-                paymentMethod.Orders.Add(newOrder);
+                var entity = context.Orders.Attach(order);
+                entity.State = EntityState.Added;
+
                 context.SaveChanges();
-                return newOrder;
+                return order;
             }
         }
+
+        public ProductOrder AddProductOrder(ProductOrder productOrder)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var entity = context.ProductOrders.Attach(productOrder);
+                entity.State = EntityState.Added;
+
+                context.SaveChanges();
+                return productOrder;
+            }
+        }
+
+        #endregion
 
         #region Products Methods
 
@@ -141,7 +153,6 @@ namespace ZTP
         {
             using (var context = new DatabaseContext())
             {
-                var newProduct = new Product { Name = product.Name, Promotion = product.Promotion, VAT = product.VAT, Price = product.Price, Quantity = product.Quantity };
                 var entity = context.Products.Attach(product);
                 entity.State = EntityState.Added;
                 context.SaveChanges();
