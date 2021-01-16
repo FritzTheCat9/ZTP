@@ -63,7 +63,11 @@ namespace ZTP
 
         private void MenuItem_AddProduct_Click(object sender, RoutedEventArgs e)
         {
+            var product = new Product { Name = "New", Price = 0, Promotion = false, Quantity = 0, VAT = 23 };
+            productsList.Add(product);
+            listBox_ProductsList.SelectedIndex = productsList.Count;
 
+            database.AddProduct(product);
         }
 
         private void MenuItem_DeleteProduct_Click(object sender, RoutedEventArgs e)
@@ -71,7 +75,18 @@ namespace ZTP
             if (listBox_ProductsList.SelectedIndex >= 0)
             {
                 var product = (Product)listBox_ProductsList.SelectedItem;
+                
+                for(int i = shoppingCartList.Count - 1; i >= 0; i--)                // usunięcie produktu z shopping cart
+                {
+                    if (shoppingCartList[i].ProductID == product.ProductID)
+                    {
+                        shoppingCartList.Remove(shoppingCartList[i]);
+                    }
+                }
+
                 productsList.Remove(product);
+
+                database.RemoveProduct(product);
             }
         }
 
@@ -79,8 +94,18 @@ namespace ZTP
         {
             if (listBox_ProductsList.SelectedIndex >= 0)
             {
-                var product = (Product) listBox_ProductsList.SelectedItem;
+                var product = (Product)listBox_ProductsList.SelectedItem;
                 shoppingCartList.Add(product);
+            }
+        }
+
+        private void TextBox_UpdateProduct(object sender, RoutedEventArgs e)
+        {
+            if (listBox_ProductsList.SelectedIndex >= 0)
+            {
+                var product = (Product)listBox_ProductsList.SelectedItem;
+
+                database.UpdateProduct(product);
             }
         }
 
@@ -91,7 +116,7 @@ namespace ZTP
 
         private void listBox_ProductsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
 
         #endregion

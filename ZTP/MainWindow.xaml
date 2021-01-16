@@ -64,17 +64,17 @@
                             </Grid.RowDefinitions>
 
                             <Label Content="Name" Margin="5" />
-                            <TextBox Name="TextBox_Name" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Name}"/>
+                            <TextBox Name="TextBox_Name" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_UpdateProduct"/>
                             <!--<Label Content="Image" Grid.Row="1" Margin="5" />
                             <TextBox Name="TextBox_Image" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Image}"/>-->
                             <Label Content="VAT"  Grid.Row="2" Margin="5" />
-                            <TextBox Name="TextBox_VAT" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=VAT}"/>
+                            <TextBox Name="TextBox_VAT" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=VAT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_UpdateProduct"/>
                             <Label Content="Price" Grid.Row="3" Margin="5" />
-                            <TextBox Name="TextBox_Price" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Price}"/>
+                            <TextBox Name="TextBox_Price" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_UpdateProduct"/>
                             <Label Content="Quantity" Grid.Row="4" Margin="5" />
-                            <TextBox Name="TextBox_Quantity" Grid.Row="4" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Quantity}"/>
+                            <TextBox Name="TextBox_Quantity" Grid.Row="4" Grid.Column="1" Padding="5" Margin="5" Text="{Binding Path=Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_UpdateProduct"/>
                             <Label Content="Promotion" Grid.Row="5" Margin="5" />
-                            <CheckBox Name="CheckBox_Promotion" Grid.Row="5" Grid.Column="1" Padding="5" Margin="5" IsChecked="{Binding Path=Promotion}"/>
+                            <CheckBox Name="CheckBox_Promotion" Grid.Row="5" Grid.Column="1" Padding="5" Margin="5" IsChecked="{Binding Path=Promotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Checked="TextBox_UpdateProduct" Unchecked="TextBox_UpdateProduct"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
@@ -156,7 +156,7 @@
                                       ItemsSource="{Binding paymentMethodsList}" DisplayMemberPath="Name"/>
                             <Label Content="Make invoice in pdf"  Grid.Row="2" Margin="5" />
                             <CheckBox Name="checkBox_InvoicePDF" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5"/>
-                            <Label Content="Make invoice in xml" Grid.Row="3" Margin="5" />
+                            <Label Content="Make invoice in txt" Grid.Row="3" Margin="5" />
                             <CheckBox Name="checkBox_InvoiceXML" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5"/>
                         </Grid>
                     </StackPanel>

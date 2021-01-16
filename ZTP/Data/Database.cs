@@ -117,7 +117,52 @@ namespace ZTP
                 return customerProducts;
             }
         }
-
         #endregion
+
+        public Order AddOrder(Order order)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var newOrder = new Order { Customer = order.Customer, ShippingMethod = order.ShippingMethod, PaymentMethod = order.PaymentMethod, Price = order.Price, OrderStatus = order.OrderStatus };
+                var customer = context.Customers.Find(newOrder.CustomerID);
+                var shippingMethod = context.ShippingMethods.Find(newOrder.ShippingMethodID);
+                var paymentMethod = context.PaymentMethods.Find(newOrder.PaymentMethodID);
+                customer.Orders.Add(newOrder);
+                shippingMethod.Orders.Add(newOrder);
+                paymentMethod.Orders.Add(newOrder);
+                context.SaveChanges();
+                return newOrder;
+            }
+        }
+
+        public Product AddProduct(Product product)
+        {
+            using (var context = new DatabaseContext())
+            {
+                context.Products.Add(product);
+                context.SaveChanges();
+                return product;
+            }
+        }
+
+        public bool RemoveProduct(Product product)
+        {
+            using (var context = new DatabaseContext())
+            {
+                context.Products.Remove(product);
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+        public Product UpdateProduct(Product product)
+        {
+            using (var context = new DatabaseContext())
+            {
+                context.Products.Update(product);
+                context.SaveChanges();
+                return product;
+            }
+        }
     }
 }
