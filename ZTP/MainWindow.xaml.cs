@@ -68,7 +68,6 @@ namespace ZTP
             customerProductsList = new ObservableCollection<CustomerProduct>(database.GetAllCustomerProducts().ToList());
             comboBox_OrderStatus.ItemsSource = Enum.GetValues(typeof(State)).Cast<State>();
             shoppingCartList = new ObservableCollection<Product>();
-            //subscribedProductsList = new ObservableCollection<Product>();
             subscribedProductsList = new ObservableCollection<Product>(database.GetAllCustomerProducts(customer));
 
             //addedPackagesList - do dodania potem
@@ -121,9 +120,12 @@ namespace ZTP
             if (listBox_ProductsList.SelectedIndex >= 0)
             {
                 var product = (Product)listBox_ProductsList.SelectedItem;
-                shoppingCartList.Add(product);
+                if(product.Quantity > 0)
+                {
+                    shoppingCartList.Add(product);
 
-                shoppingCartPrice += product.Price;
+                    shoppingCartPrice += product.Price;
+                }
             }
         }
 
@@ -247,6 +249,17 @@ namespace ZTP
 
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path) { UseShellExecute = true });
             }
+
+            for (int i = shoppingCartList.Count - 1; i >= 0; i--)                // usunięcie produktu z shopping cart
+            {
+                var p = shoppingCartList[i];
+                p.Quantity--;
+                database.UpdateProduct(p);
+
+                shoppingCartList.Remove(shoppingCartList[i]);
+            }
+
+            shoppingCartPrice = 0;
         }
 
         private void comboBox_MakeInvoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
