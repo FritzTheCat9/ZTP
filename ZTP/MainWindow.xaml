@@ -247,13 +247,17 @@
                             </Grid.RowDefinitions>
 
                             <Label Content="FirstName" Margin="5"/>
-                            <TextBox Name="TextBox_FirstName" Grid.Column="1" Padding="5" Margin="5" Text="{Binding customer.FirstName}"/>
+                            <TextBox Name="TextBox_FirstName" Grid.Column="1" Padding="5" Margin="5" 
+                                     Text="{Binding customer.FirstName}" IsEnabled="False"/>
                             <Label Content="LastName" Grid.Row="1" Margin="5" />
-                            <TextBox Name="TextBox_LastName" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5" Text="{Binding customer.LastName}"/>
+                            <TextBox Name="TextBox_LastName" Grid.Row="1" Grid.Column="1" Padding="5" Margin="5" 
+                                     Text="{Binding customer.LastName}" IsEnabled="False"/>
                             <Label Content="Login"  Grid.Row="2" Margin="5" />
-                            <TextBox Name="TextBox_Login" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5" Text="{Binding customer.Login}"/>
+                            <TextBox Name="TextBox_Login" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5" 
+                                     Text="{Binding customer.Login}" IsEnabled="False"/>
                             <Label Content="Password" Grid.Row="3" Margin="5" />
-                            <TextBox Name="TextBox_Password" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5" Text="{Binding customer.Password}"/>
+                            <TextBox Name="TextBox_Password" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5" 
+                                     Text="{Binding customer.Password}" IsEnabled="False"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
@@ -294,7 +298,7 @@
 
                             <Label Content="Order Status" Grid.Row="1" Margin="5" />
                             <ComboBox Grid.Column="1" Name="comboBox_OrderStatus" Padding="5" Margin="5" SelectedIndex="0" 
-                                      SelectedValue="{Binding OrderStatus}">
+                                      SelectedValue="{Binding Path=OrderStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="comboBox_OrderStatus_SelectionChanged">
                             </ComboBox>
                         </Grid>
                     </Grid>

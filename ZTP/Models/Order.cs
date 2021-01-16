@@ -43,7 +43,13 @@ namespace ZTP.Models
         [Required]
         [EnumDataType(typeof(State))]
         [Display(Name = "Stan")]
-        public State OrderStatus { get; set; }
+        private State _orderStatus;
+        public State OrderStatus
+        {
+            get { return _orderStatus; }
+            set { _orderStatus = value; NotifyPropertyChanged("OrderStatus"); }
+        }
+
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         [Display(Name = "Cena")]

@@ -132,9 +132,19 @@ namespace ZTP
             {
                 var entity = context.Orders.Attach(order);
                 entity.State = EntityState.Added;
-
                 context.SaveChanges();
                 return order;
+            }
+        }
+
+        public bool UpdateOrder(Order order)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var entity = context.Orders.Attach(order);
+                entity.State = EntityState.Modified;
+                context.SaveChanges();
+                return true;
             }
         }
 
@@ -144,7 +154,6 @@ namespace ZTP
             {
                 var entity = context.ProductOrders.Attach(productOrder);
                 entity.State = EntityState.Added;
-
                 context.SaveChanges();
                 return productOrder;
             }
@@ -193,7 +202,6 @@ namespace ZTP
             {
                 var entity = context.CustomerProducts.Attach(customerProduct);
                 entity.State = EntityState.Added;
-
                 context.SaveChanges();
                 return true;
             }

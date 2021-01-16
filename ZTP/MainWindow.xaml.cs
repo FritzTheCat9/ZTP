@@ -247,8 +247,17 @@ namespace ZTP
 
         }
 
+        private void comboBox_OrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listBox_OrdersList.SelectedIndex >= 0)
+            {
+                var order = (Order)listBox_OrdersList.SelectedItem;
+
+                database.UpdateOrder(order);
+            }
+        }
+
         #endregion
 
-       
     }
 }
