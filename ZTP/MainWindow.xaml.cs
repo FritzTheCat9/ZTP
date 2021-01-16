@@ -122,9 +122,14 @@ namespace ZTP
                 var product = (Product)listBox_ProductsList.SelectedItem;
                 if(product.Quantity > 0)
                 {
-                    shoppingCartList.Add(product);
+                    var productsCount = shoppingCartList.Where(p => p.ProductID == product.ProductID).Count();
 
-                    shoppingCartPrice += product.Price;
+                    if(product.Quantity > productsCount)
+                    {
+                        shoppingCartList.Add(product);
+
+                        shoppingCartPrice += product.Price;
+                    }
                 }
             }
         }
