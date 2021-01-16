@@ -22,6 +22,9 @@ namespace ZTP
     {
         public Customer customer = null;
 
+        /*public string login = "";
+        public string password = "";*/
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -37,6 +40,12 @@ namespace ZTP
                 Close();
                 mainWindow.ShowDialog();
             }
+
+            /*login = TextBox_Login.Text;
+            password = TextBox_Password.Text;
+
+            DialogResult = true;
+            Close();*/
         }
     }
 }

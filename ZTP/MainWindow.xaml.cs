@@ -59,6 +59,7 @@ namespace ZTP
             DataContext = this;
 
             customer = loginWindow.customer;
+
             productsList = new ObservableCollection<Product>(database.GetAllProducts().ToList());
             customersList = new ObservableCollection<Customer>(database.GetAllCustomers().ToList());
             shippingMethodsList = new ObservableCollection<ShippingMethod>(database.GetAllShippingMethods().ToList());
