@@ -55,8 +55,9 @@ namespace ZTP
             customerProductsList = new ObservableCollection<CustomerProduct>(database.GetAllCustomerProducts().ToList());
             comboBox_OrderStatus.ItemsSource = Enum.GetValues(typeof(State)).Cast<State>();
             shoppingCartList = new ObservableCollection<Product>();
-
             //subscribedProductsList = new ObservableCollection<Product>();
+            subscribedProductsList = new ObservableCollection<Product>(database.GetAllCustomerProducts(customer));
+
             //addedPackagesList - do dodania potem
         }
 
@@ -84,6 +85,14 @@ namespace ZTP
                     if (shoppingCartList[i].ProductID == product.ProductID)
                     {
                         shoppingCartList.Remove(shoppingCartList[i]);
+                    }
+                }
+
+                for (int i = subscribedProductsList.Count - 1; i >= 0; i--)                // usunięcie produktu z produktów obserwowanych
+                {
+                    if (subscribedProductsList[i].ProductID == product.ProductID)
+                    {
+                        subscribedProductsList.Remove(subscribedProductsList[i]);
                     }
                 }
 
@@ -117,7 +126,30 @@ namespace ZTP
 
         private void MenuItem_Observe_Click(object sender, RoutedEventArgs e)
         {
+            if (listBox_ProductsList.SelectedIndex >= 0)
+            {
+                var product = (Product)listBox_ProductsList.SelectedItem;
+                var customerProduct = new CustomerProduct { Customer = customer, Product = product };
 
+                var allCustomerProducts = database.GetAllCustomerProducts(customer);
+
+                bool isInList = false;
+                foreach (var p in allCustomerProducts)
+                {
+                    if(p.ProductID == product.ProductID)
+                    {
+                        isInList = true;
+                    }
+                }
+
+                if(!isInList)
+                {
+                    if (database.AddCustomerProduct(customerProduct))
+                    {
+                        subscribedProductsList.Add(product);
+                    }
+                }
+            }
         }
 
         private void listBox_ProductsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -184,7 +216,16 @@ namespace ZTP
 
         private void MenuItem_UnsubscribeProduct_Click(object sender, RoutedEventArgs e)
         {
+            if (listBox_SubscribedProductsList.SelectedIndex >= 0)
+            {
+                var product = (Product)listBox_SubscribedProductsList.SelectedItem;
+                var customerProduct = new CustomerProduct { Customer = customer, Product = product };
 
+                if (database.RemoveCustomerProduct(customerProduct))
+                {
+                    subscribedProductsList.Remove(product);
+                }
+            }
         }
 
         private void listBox_SubscribedProductsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

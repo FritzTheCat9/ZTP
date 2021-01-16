@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +14,6 @@ namespace ZTP
         /* POLA */
 
         private static Database instance = new Database();
-        /*private ICollection<Product> Products;
-        private ICollection<Category> Categories;
-        private ICollection<Customer> Customers;
-        private ICollection<Address> Addresses;
-        private ICollection<ShippingMethod> ShippingMethods;
-        private ICollection<PaymentMethod> PaymentMethods;
-        private ICollection<Order> Orders;
-        private ICollection<ProductOrder> ProductOrders;*/
 
         /* METODY */
 
@@ -33,11 +26,6 @@ namespace ZTP
             }
             return instance;
         }
-
-        /*private void createCategories() { }
-        private void createProducts() { }
-        private void createUsers() { }
-        private void createPayments() { }*/
 
         public Customer CheckLoginAndPassword(string login, string password)
         {
@@ -117,6 +105,23 @@ namespace ZTP
                 return customerProducts;
             }
         }
+
+        public IEnumerable<Product> GetAllCustomerProducts(Customer customer)
+        {
+            using (var context = new DatabaseContext())
+            {
+                IList<Product> productList = new ObservableCollection<Product>();
+                var customerProducts = context.CustomerProducts.Include(cp => cp.Customer).Include(cp => cp.Product).Where(cp => cp.Customer.CustomerID == customer.CustomerID).ToList();
+
+                foreach (var cp in customerProducts)
+                {
+                    productList.Add(cp.Product);
+                }
+
+                return productList;
+            }
+        }
+
         #endregion
 
         #region Order Methods
@@ -157,11 +162,6 @@ namespace ZTP
                 entity.State = EntityState.Added;
                 context.SaveChanges();
                 return true;
-
-                /*var newProduct = new Product { Name = product.Name, Promotion = product.Promotion, VAT = product.VAT, Price = product.Price, Quantity = product.Quantity };
-                context.Products.Add(newProduct);
-                context.SaveChanges();
-                return true;*/
             }
         }
 
@@ -173,10 +173,6 @@ namespace ZTP
                 entity.State = EntityState.Deleted;
                 context.SaveChanges();
                 return true;
-
-                /*context.Products.Remove(product);
-                context.SaveChanges();
-                return true;*/
             }
         }
 
@@ -188,10 +184,36 @@ namespace ZTP
                 entity.State = EntityState.Modified;
                 context.SaveChanges();
                 return true;
+            }
+        }
 
-                /*context.Products.Update(product);
+        public bool AddCustomerProduct(CustomerProduct customerProduct)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var entity = context.CustomerProducts.Attach(customerProduct);
+                entity.State = EntityState.Added;
+
                 context.SaveChanges();
-                return true;*/
+                return true;
+            }
+        }
+
+        public bool RemoveCustomerProduct(CustomerProduct customerProduct)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var customer = customerProduct.Customer;
+                var product = customerProduct.Product;
+                var customerProductToRemove = context.CustomerProducts.Where(cp => cp.CustomerID == customer.CustomerID && cp.ProductID == product.ProductID).FirstOrDefault();
+
+                if(customerProductToRemove != null)
+                {
+                    context.Remove(customerProductToRemove);
+                }
+
+                context.SaveChanges();
+                return true;
             }
         }
 
