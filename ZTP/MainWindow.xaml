@@ -314,19 +314,62 @@
 
                     <Label Grid.Column="1" Content="Admin panel" HorizontalAlignment="Center" FontWeight="Bold"></Label>
 
-                    <StackPanel Grid.Column="1" Grid.Row="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                            <Button Name="button_discountProducts" Content="Discount every 5th product" Margin="5" Padding="5" Click="button_discountProducts_Click"/>
-                        </Grid>
-                    </StackPanel>
+                        <StackPanel>
+                            <Grid DataContext="{Binding ElementName=listBox_OrdersList, Path=SelectedItem}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Button Name="button_discountProducts" Content="Discount every 5th product" Margin="5" Padding="5" Click="button_discountProducts_Click"/>
+
+                                <Label Content="Customer" Margin="5" Grid.Row="1"/>
+                                <TextBox Name="TextBox_OrderCustomerID"  Grid.Column="1" Grid.Row="1" Padding="5" Margin="5" IsEnabled="False"
+                                     Text="{Binding Path=Customer.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_UpdateProduct"/>
+                                <Label Content="Shipping Method"  Grid.Row="2" Margin="5" />
+                                <TextBox Name="TextBox_OrderShippingMethodID" Grid.Row="2" Grid.Column="1" Padding="5" Margin="5" IsEnabled="False"
+                                     Text="{Binding Path=ShippingMethod.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_UpdateProduct"/>
+                                <Label Content="Payment Method" Grid.Row="3" Margin="5" />
+                                <TextBox Name="TextBox_OrderPaymentMethodID" Grid.Row="3" Grid.Column="1" Padding="5" Margin="5" IsEnabled="False"
+                                     Text="{Binding Path=PaymentMethod.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_UpdateProduct"/>
+                                <Label Content="Order Status" Grid.Row="4" Margin="5" />
+                                <TextBox Name="TextBox_OrderOrderStatus" Grid.Row="4" Grid.Column="1" Padding="5" Margin="5" IsEnabled="False"
+                                     Text="{Binding Path=OrderStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_UpdateProduct"/>
+                                <Label Content="Price" Grid.Row="5" Margin="5" />
+                                <TextBox Name="TextBox_OrderPrice" Grid.Row="5" Grid.Column="1" Padding="5" Margin="5" IsEnabled="False"
+                                     Text="{Binding Path=Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_UpdateProduct"/>
+                            </Grid>
+
+                        </StackPanel>
+                        <ListBox Name="listBox_productsInSelectedOrder" IsEnabled="False" Grid.Row="1"
+                             ItemsSource="{Binding productsInSelectedOrder}" DisplayMemberPath="Name"
+                             Padding="5" Margin="5" SelectionChanged="listBox_OrdersList_SelectionChanged" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                             ScrollViewer.CanContentScroll="False">
+                        </ListBox>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>

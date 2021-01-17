@@ -79,9 +79,12 @@ namespace ZTP.Models
                 db.Write("Price: " + products[i].Price + "zł");
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
                 db.Write("VAT: " + products[i].VAT + "%");
-                db.InsertSpecialCharacter(SpecialCharacterType.LineBreak); 
-                db.Write("Packages: " + shoppingCartDecoratorsList[i].getDescription());
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
+                if (shoppingCartDecoratorsList.Count > 0)
+                {
+                    db.Write("Packages: " + shoppingCartDecoratorsList[i].getDescription());
+                    db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
+                }
             }
 
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);

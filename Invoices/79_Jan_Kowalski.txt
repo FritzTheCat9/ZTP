@@ -14,7 +14,7 @@ LastName: Kowalski
 
 
 ------------------------------------------------- 
-Order Price: 30,00zł
+Order Price: 10,00zł
 ------------------------------------------------- 
 
 
@@ -33,18 +33,8 @@ Name: Kurier UPS
 ------------------------------------------------- 
 Ordered products: 
 
-Name: Czipsy
-Price: 5,00zł
+Name: ddd
+Price: 10,00zł
 VAT: 23%
-Packages: Czipsy
-Dodatek: Folia bąbelkowa + 5zł
-
-Name: Czipsy
-Price: 5,00zł
-VAT: 23%
-Packages: Czipsy
-Dodatek: Folia bąbelkowa + 5zł
-Dodatek: Kartonowe pudełko + 10zł
-
 ------------------------------------------------- 
 

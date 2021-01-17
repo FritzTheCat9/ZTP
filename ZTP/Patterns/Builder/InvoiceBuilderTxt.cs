@@ -54,7 +54,10 @@ namespace ZTP.Patterns
                 innvoiceText += "Name: " + products[i].Name + "\n";
                 innvoiceText += "Price: " + products[i].Price + "zł\n";
                 innvoiceText += "VAT: " + products[i].VAT + "%\n";
-                innvoiceText += "Packages: " + shoppingCartDecoratorsList[i].getDescription() + "\n";
+                if(shoppingCartDecoratorsList.Count > 0)
+                {
+                    innvoiceText += "Packages: " + shoppingCartDecoratorsList[i].getDescription() + "\n";
+                }
             }
 
             innvoiceText += "------------------------------------------------- \n";

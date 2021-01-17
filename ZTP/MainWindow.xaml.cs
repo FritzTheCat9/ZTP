@@ -43,6 +43,7 @@ namespace ZTP
         /* LISTY DO WIDOKU */
         public IList<Product> shoppingCartList { get; set; } = new ObservableCollection<Product>();
         public IList<Product> subscribedProductsList { get; set; } = new ObservableCollection<Product>();
+        public IList<Product> productsInSelectedOrder { get; set; } = new ObservableCollection<Product>();
 
         /* DECORATOR - PATTERN */
         public IList<ProductDecorator> shoppingCartDecoratorsList { get; set; } = new ObservableCollection<ProductDecorator>();
@@ -305,54 +306,60 @@ namespace ZTP
 
         private void button_Order_Click(object sender, RoutedEventArgs e)
         {
-            var shippingMethod = (ShippingMethod)comboBox_ShippingMethod.SelectedItem;
-            var paymentMethod = (PaymentMethod)comboBox_PaymentMethod.SelectedItem;
-            var order = new Order { Customer = customer, ShippingMethod = shippingMethod, PaymentMethod = paymentMethod, OrderStatus = State.Preparing, Price = shoppingCartPrice + packagesPrice };
-            database.AddOrder(order);
-
-            ordersList.Add(order);
-
-            foreach (var product in shoppingCartList)
+            if(shoppingCartList.Count != 0)
             {
-                var newProductOrder = new ProductOrder { Order = order, Product = product };
-                database.AddProductOrder(newProductOrder);
+                var shippingMethod = (ShippingMethod)comboBox_ShippingMethod.SelectedItem;
+                var paymentMethod = (PaymentMethod)comboBox_PaymentMethod.SelectedItem;
+                var order = new Order { Customer = customer, ShippingMethod = shippingMethod, PaymentMethod = paymentMethod, OrderStatus = State.Preparing, Price = shoppingCartPrice + packagesPrice };
+                database.AddOrder(order);
+
+                ordersList.Add(order);
+
+                foreach (var product in shoppingCartList)
+                {
+                    var newProductOrder = new ProductOrder { Order = order, Product = product };
+                    database.AddProductOrder(newProductOrder);
+                    productOrdersList.Add(newProductOrder);
+                }
+
+                string workingDirectory = Environment.CurrentDirectory;
+                string solutionDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+                string invoicesDirectory = solutionDirectory + @"\Invoices\";
+                var path = invoicesDirectory + order.OrderID + "_" + order.Customer.FirstName + "_" + order.Customer.LastName;
+
+                if (comboBox_MakeInvoice.SelectedIndex == 0)
+                {
+                    InvoiceBuilderTxt invoiceBuilder = new InvoiceBuilderTxt();
+                    constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
+                    var invoiceText = invoiceBuilder.GetInvoiceInTxt();
+                    path += ".txt";
+                    File.WriteAllText(path, invoiceText);
+                }
+                else
+                {
+                    InvoiceBuilderPdf invoiceBuilder = new InvoiceBuilderPdf();
+                    constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
+                    DocumentCore invoicePdf = invoiceBuilder.GetInvoiceInPdf();
+                    path += ".pdf";
+                    invoicePdf.Save(path);
+
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path) { UseShellExecute = true });
+                }
+
+                for (int i = shoppingCartList.Count - 1; i >= 0; i--)                // usunięcie produktu z shopping cart
+                {
+                    var p = shoppingCartList[i];
+                    p.Quantity--;
+                    database.UpdateProduct(p);
+
+                    shoppingCartList.Remove(shoppingCartList[i]);
+                }
+
+                shoppingCartPrice = 0;
+                cartChanged = true;
             }
 
-            string workingDirectory = Environment.CurrentDirectory;
-            string solutionDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-            string invoicesDirectory = solutionDirectory + @"\Invoices\";
-            var path = invoicesDirectory + order.OrderID + "_" + order.Customer.FirstName + "_" + order.Customer.LastName;
-
-            if (comboBox_MakeInvoice.SelectedIndex == 0)
-            {
-                InvoiceBuilderTxt invoiceBuilder = new InvoiceBuilderTxt();
-                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
-                var invoiceText = invoiceBuilder.GetInvoiceInTxt();
-                path += ".txt";
-                File.WriteAllText(path, invoiceText);
-            }
-            else
-            {
-                InvoiceBuilderPdf invoiceBuilder = new InvoiceBuilderPdf();
-                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
-                DocumentCore invoicePdf = invoiceBuilder.GetInvoiceInPdf();
-                path += ".pdf";
-                invoicePdf.Save(path);
-
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path) { UseShellExecute = true });
-            }
-
-            for (int i = shoppingCartList.Count - 1; i >= 0; i--)                // usunięcie produktu z shopping cart
-            {
-                var p = shoppingCartList[i];
-                p.Quantity--;
-                database.UpdateProduct(p);
-
-                shoppingCartList.Remove(shoppingCartList[i]);
-            }
-
-            shoppingCartPrice = 0;
-            cartChanged = true;
+            
         }
 
         private void comboBox_MakeInvoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -389,7 +396,20 @@ namespace ZTP
 
         private void listBox_OrdersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if(listBox_OrdersList.SelectedIndex >= 0)
+            {
+                var selectedOrder = (Order)listBox_OrdersList.SelectedItem;
 
+                productsInSelectedOrder.Clear();
+
+                foreach (var po in productOrdersList)
+                {
+                    if (po.OrderID == selectedOrder.OrderID)
+                    {
+                        productsInSelectedOrder.Add(po.Product);
+                    }
+                }
+            }
         }
 
         private void button_discountProducts_Click(object sender, RoutedEventArgs e)
