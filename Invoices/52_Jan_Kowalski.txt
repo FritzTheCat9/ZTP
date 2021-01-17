@@ -18,25 +18,19 @@ LastName: Kowalski
 ------------------------------------------------- 
 PaymentMethod: 
 
-Name: Szybki przelew
+Name: Karta
 ------------------------------------------------- 
 
 
 ------------------------------------------------- 
 ShippingMethod: 
 
-Name: Kurier UPS
+Name: Poczta Polska
 ------------------------------------------------- 
 
 
 ------------------------------------------------- 
 Ordered products: 
 
-Name: Czipsy
-Price: 5,00
-VAT: 23
-Name: Czipsy
-Price: 5,00
-VAT: 23
 ------------------------------------------------- 
 

@@ -46,7 +46,7 @@ namespace ZTP.Models
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
         }
 
-        public void AddProductsInfo(List<Product> products)
+        public void AddProductsInfo(List<Product> products, IList<ProductDecorator> shoppingCartDecoratorsList)
         {
             DocumentBuilder db = new DocumentBuilder(dc);
             db.CharacterFormat.Size = 15.0f;
@@ -58,14 +58,16 @@ namespace ZTP.Models
             db.CharacterFormat.Bold = false;
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
 
-            foreach (var product in products)
+            for(int i = 0; i < products.Count; i++)
             {
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
-                db.Write("Name: " + product.Name);
+                db.Write(i + 1 + ". Name: " + products[i].Name);
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
-                db.Write("Price: " + product.Price);
+                db.Write("Price: " + products[i].Price);
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
-                db.Write("VAT: " + product.VAT);
+                db.Write("VAT: " + products[i].VAT);
+                db.InsertSpecialCharacter(SpecialCharacterType.LineBreak); 
+                db.Write("Packages: " + shoppingCartDecoratorsList[i].getDescription());
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
             }
 

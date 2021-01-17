@@ -12,7 +12,7 @@ namespace ZTP.Patterns
         void AddCustomerInfo(Customer customer);
         void AddShippingMethodInfo(ShippingMethod shippingMethod);
         void AddPaymentMethodInfo(PaymentMethod paymentMethod);
-        void AddProductsInfo(List<Product> products);
+        void AddProductsInfo(List<Product> products, IList<ProductDecorator> shoppingCartDecoratorsList);
         void AddSellerInfo();
     }
 }

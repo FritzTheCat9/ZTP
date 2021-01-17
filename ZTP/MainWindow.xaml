@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" MinHeight="450" MinWidth="800" >
     <Grid>
-        <TabControl TabStripPlacement="Top" Padding="5" Margin="5">
+        <TabControl Name="TabControlName" TabStripPlacement="Top" Padding="5" Margin="5">
             <TabItem Header="Product list" Padding="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -79,7 +79,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Shopping cart" Padding="5">
+            <TabItem Header="Shopping cart" Padding="5" GotFocus="TabItem_GotFocus">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

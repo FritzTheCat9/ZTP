@@ -202,6 +202,7 @@
     <Compile Include="Models\CustomerProduct.cs" />
     <Compile Include="Patterns\Decorator\BubbleWrap.cs" />
     <Compile Include="Patterns\Decorator\CardboardBox.cs" />
+    <Compile Include="Patterns\Decorator\EmptyDecorator.cs" />
     <Compile Include="Patterns\Decorator\PlasticBox.cs" />
     <Compile Include="Patterns\Builder\InvoiceBuilderPdf.cs" />
     <Compile Include="Models\Order.cs" />

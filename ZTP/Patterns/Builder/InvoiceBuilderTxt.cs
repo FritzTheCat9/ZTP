@@ -34,7 +34,7 @@ namespace ZTP.Patterns
             innvoiceText += "\n";
         }
 
-        public void AddProductsInfo(List<Product> products)
+        public void AddProductsInfo(List<Product> products, IList<ProductDecorator> shoppingCartDecoratorsList)
         {
             innvoiceText += "\n";
             innvoiceText += "------------------------------------------------- \n";
@@ -42,11 +42,12 @@ namespace ZTP.Patterns
             innvoiceText += "Ordered products: \n";
             innvoiceText += "\n";
 
-            foreach (var product in products)
+            for (int i = 0; i < products.Count; i++)
             {
-                innvoiceText += "Name: " + product.Name + "\n";
-                innvoiceText += "Price: " + product.Price + "\n";
-                innvoiceText += "VAT: " + product.VAT + "\n";
+                innvoiceText += "Name: " + products[i].Name + "\n";
+                innvoiceText += "Price: " + products[i].Price + "\n";
+                innvoiceText += "VAT: " + products[i].VAT + "\n";
+                innvoiceText += "Packages: " + shoppingCartDecoratorsList[i].getDescription() + "\n";
             }
 
             innvoiceText += "------------------------------------------------- \n";
