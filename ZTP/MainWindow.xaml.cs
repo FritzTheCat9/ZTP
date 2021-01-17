@@ -42,7 +42,9 @@ namespace ZTP
         /* LISTY DO WIDOKU */
         public IList<Product> shoppingCartList { get; set; } = new ObservableCollection<Product>();
         public IList<Product> subscribedProductsList { get; set; } = new ObservableCollection<Product>();
-        //addedPackagesList - do dodania potem
+
+        /* DECORATOR - PATTERN */
+        public IList<ProductBase> addedPackagesList { get; set; } = new ObservableCollection<ProductBase>();
 
         /* BUILDER - PATTERN */
         private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order)
@@ -71,6 +73,7 @@ namespace ZTP
             comboBox_OrderStatus.ItemsSource = Enum.GetValues(typeof(State)).Cast<State>();
             shoppingCartList = new ObservableCollection<Product>();
             subscribedProductsList = new ObservableCollection<Product>(database.GetAllCustomerProducts(customer));
+            addedPackagesList = new ObservableCollection<ProductBase>();
 
             //addedPackagesList - do dodania potem
         }
@@ -185,17 +188,44 @@ namespace ZTP
 
         private void MenuItem_AddBubbleWrap_Click(object sender, RoutedEventArgs e)
         {
+            if (listBox_ShoppingCartList.SelectedIndex >= 0)
+            {
+                var product = (Product)listBox_ShoppingCartList.SelectedItem;
 
+                BubbleWrap productInBubbleWrap = new BubbleWrap(product);
+
+                TextBlock_Description.Text = productInBubbleWrap.getDescription();
+
+                addedPackagesList.Add(productInBubbleWrap);
+            }
         }
 
         private void MenuItem_AddCardboardBox_Click(object sender, RoutedEventArgs e)
         {
+            if (listBox_ShoppingCartList.SelectedIndex >= 0)
+            {
+                var product = (Product)listBox_ShoppingCartList.SelectedItem;
 
+                CardboardBox productInCardboardBox = new CardboardBox(product);
+
+                TextBlock_Description.Text = productInCardboardBox.getDescription();
+
+                addedPackagesList.Add(productInCardboardBox);
+            }
         }
 
         private void MenuItem_AddPlasticBox_Click(object sender, RoutedEventArgs e)
         {
+            if (listBox_ShoppingCartList.SelectedIndex >= 0)
+            {
+                var product = (Product)listBox_ShoppingCartList.SelectedItem;
 
+                PlasticBox productInPlasticBox = new PlasticBox(product);
+
+                TextBlock_Description.Text = productInPlasticBox.getDescription();
+
+                addedPackagesList.Add(productInPlasticBox);
+            }
         }
 
         private void MenuItem_RemoveFromCart_Click(object sender, RoutedEventArgs e)

@@ -200,7 +200,10 @@
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\DatabaseContext.cs" />
     <Compile Include="Models\CustomerProduct.cs" />
-    <Compile Include="Models\InvoiceBuilderPdf.cs" />
+    <Compile Include="Patterns\Decorator\BubbleWrap.cs" />
+    <Compile Include="Patterns\Decorator\CardboardBox.cs" />
+    <Compile Include="Patterns\Decorator\PlasticBox.cs" />
+    <Compile Include="Patterns\Builder\InvoiceBuilderPdf.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Product.cs" />
@@ -224,8 +227,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Patterns\InvoiceBuilder.cs" />
-    <Compile Include="Patterns\InvoiceBuilderTxt.cs" />
+    <Compile Include="Patterns\Builder\InvoiceBuilder.cs" />
+    <Compile Include="Patterns\Builder\InvoiceBuilderTxt.cs" />
+    <Compile Include="Patterns\Decorator\ProductDecorator.cs" />
+    <Compile Include="Patterns\Decorator\ProductBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
