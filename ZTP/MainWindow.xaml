@@ -175,6 +175,7 @@
                         <Label Content="Products in shopping cart" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
                         <ListBox Name="listBox_OrderProductList" Grid.Row="1"
                              ItemsSource="{Binding shoppingCartList}" DisplayMemberPath="ProductDisplay"
+                             SelectionChanged="listBox_OrderProductList_SelectionChanged"
                              Padding="5" Margin="5"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -189,13 +190,16 @@
                         </Grid.RowDefinitions>
 
                         <Label Content="Added products packages" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
-                        <ListBox Name="listBox_OrderPackagesList" Grid.Row="1"
+                        
+                        <TextBox Name="TextBlock_Description2" Grid.Row="1" IsEnabled="False"/>
+                        
+                        <!--<ListBox Name="listBox_OrderPackagesList" Grid.Row="1"
                              ItemsSource="{Binding addedPackagesList}" DisplayMemberPath="ProductDisplay"
                              Padding="5" Margin="5"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
                              ScrollViewer.CanContentScroll="False">
-                        </ListBox>
+                        </ListBox>-->
                     </Grid>
 
                     <Button Name="button_Order" Grid.Row="3" Grid.ColumnSpan="3" Content="Order" HorizontalAlignment="Center" 

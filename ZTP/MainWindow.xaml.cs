@@ -193,7 +193,7 @@ namespace ZTP
 
         private void TabItem_GotFocus(object sender, RoutedEventArgs e)
         {
-            if(cartChanged && TextBlock_Description != null)
+            if(cartChanged && TextBlock_Description != null && TextBlock_Description2 != null)
             {
                 cartChanged = false;
                 packagesPrice = 0;
@@ -203,6 +203,7 @@ namespace ZTP
                     shoppingCartDecoratorsList.Add(new EmptyDecorator(shoppingCartList[i]));
                 }
                 TextBlock_Description.Text = "";
+                TextBlock_Description2.Text = "";
             }
         }
 
@@ -213,6 +214,7 @@ namespace ZTP
             {
                 shoppingCartDecoratorsList[index] = new BubbleWrap(shoppingCartDecoratorsList[index]);
                 TextBlock_Description.Text = shoppingCartDecoratorsList[index].getDescription();
+                TextBlock_Description2.Text = shoppingCartDecoratorsList[index].getDescription();
                 packagesPrice += 5;
             }
         }
@@ -224,6 +226,7 @@ namespace ZTP
             {
                 shoppingCartDecoratorsList[index] = new CardboardBox(shoppingCartDecoratorsList[index]);
                 TextBlock_Description.Text = shoppingCartDecoratorsList[index].getDescription();
+                TextBlock_Description2.Text = shoppingCartDecoratorsList[index].getDescription();
                 packagesPrice += 10;
             }
         }
@@ -235,6 +238,7 @@ namespace ZTP
             {
                 shoppingCartDecoratorsList[index] = new PlasticBox(shoppingCartDecoratorsList[index]);
                 TextBlock_Description.Text = shoppingCartDecoratorsList[index].getDescription();
+                TextBlock_Description2.Text = shoppingCartDecoratorsList[index].getDescription();
                 packagesPrice += 15;
             }
         }
@@ -262,6 +266,15 @@ namespace ZTP
         #endregion
 
         #region Order
+
+        private void listBox_OrderProductList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var index = listBox_OrderProductList.SelectedIndex;
+            if (index >= 0)
+            {
+                TextBlock_Description2.Text = shoppingCartDecoratorsList[index].getDescription();
+            }
+        }
 
         private void button_Order_Click(object sender, RoutedEventArgs e)
         {
@@ -377,5 +390,6 @@ namespace ZTP
         }
 
         #endregion
+
     }
 }
