@@ -328,7 +328,8 @@ namespace ZTP
             var index = listBox_ShoppingCartList.SelectedIndex;
             if (index >= 0)
             {
-                TextBlock_Description.Text = shoppingCartDecoratorsList[index].getDescription();
+                if (shoppingCartDecoratorsList.Count > 0)
+                    TextBlock_Description.Text = shoppingCartDecoratorsList[index].getDescription();
             }
         }
 
@@ -341,7 +342,8 @@ namespace ZTP
             var index = listBox_OrderProductList.SelectedIndex;
             if (index >= 0)
             {
-                TextBlock_Description2.Text = shoppingCartDecoratorsList[index].getDescription();
+                if(shoppingCartDecoratorsList.Count > 0)
+                    TextBlock_Description2.Text = shoppingCartDecoratorsList[index].getDescription();
             }
         }
 
@@ -399,8 +401,6 @@ namespace ZTP
                 shoppingCartPrice = 0;
                 cartChanged = true;
             }
-
-            
         }
 
         private void comboBox_MakeInvoice_SelectionChanged(object sender, SelectionChangedEventArgs e)
