@@ -243,7 +243,8 @@
                              Padding="5" Margin="5" SelectionChanged="listBox_SubscribedProductsList_SelectionChanged" 
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
-                             ScrollViewer.CanContentScroll="False">
+                             ScrollViewer.CanContentScroll="False"
+                                 >
                         </ListBox>
                     </Grid>
 

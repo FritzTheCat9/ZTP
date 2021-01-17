@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -192,10 +193,48 @@ namespace ZTP
         {
             if (listBox_ProductsList.SelectedIndex >= 0)
             {
-                var product = (Product)listBox_ProductsList.SelectedItem;
+                var product = (Product)listBox_ProductsList.SelectedItem;       
 
                 database.UpdateProduct(product);
             }
+        }
+
+        private void TextBox_UpdateProduct(object sender, TextChangedEventArgs e)
+        {
+            if (listBox_ProductsList.SelectedIndex >= 0)
+            {
+                var product = (Product)listBox_ProductsList.SelectedItem;
+
+                Brush color = Brushes.Black;
+
+                if (product.Quantity > 0)
+                {
+                    color = Brushes.Green;
+                }
+
+                var i = -1;
+                foreach (var subProduct in subscribedProductsList)
+                {
+                    i++;
+                    if (subProduct.ProductID == product.ProductID)
+                    {
+                        ListBoxItem listElement = (ListBoxItem)listBox_SubscribedProductsList.ItemContainerGenerator.ContainerFromIndex(i);
+                        if (listElement != null)
+                        {
+                            listElement.Foreground = color;
+                        }
+                    }
+                }
+
+                product.Notify();
+
+                database.UpdateProduct(product);
+            }
+        }
+
+        private void CheckObservers()
+        {
+            
         }
 
         private void MenuItem_Observe_Click(object sender, RoutedEventArgs e)
@@ -216,11 +255,13 @@ namespace ZTP
                     }
                 }
 
-                if(!isInList)
+                if(!isInList && product.Quantity <= 0)
                 {
                     if (database.AddCustomerProduct(customerProduct))
-                    {
+                    {                        
                         subscribedProductsList.Add(product);
+                        
+                        product.Attach(customer);
                     }
                 }
             }
@@ -401,6 +442,7 @@ namespace ZTP
 
         #region Customer
 
+
         private void MenuItem_UnsubscribeProduct_Click(object sender, RoutedEventArgs e)
         {
             if (listBox_SubscribedProductsList.SelectedIndex >= 0)
@@ -411,10 +453,12 @@ namespace ZTP
                 if (database.RemoveCustomerProduct(customerProduct))
                 {
                     subscribedProductsList.Remove(product);
+                    product.Detach(customer);
                 }
             }
         }
 
+      
         private void listBox_SubscribedProductsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -467,5 +511,6 @@ namespace ZTP
         }
 
         #endregion
+
     }
 }

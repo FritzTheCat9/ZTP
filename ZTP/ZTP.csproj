@@ -236,6 +236,8 @@
     <Compile Include="Patterns\Iterator\Iterator.cs" />
     <Compile Include="Patterns\Iterator\IteratorAggregate.cs" />
     <Compile Include="Patterns\Iterator\ProductsCollection.cs" />
+    <Compile Include="Patterns\Observer\IObserver.cs" />
+    <Compile Include="Patterns\Observer\ISubject.cs" />
     <Compile Include="Patterns\Strategy\IBillingStrategy.cs" />
     <Compile Include="Patterns\Strategy\InvoiceStrategy.cs" />
     <Compile Include="Patterns\Strategy\ReceiptStrategy.cs" />
