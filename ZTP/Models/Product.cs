@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZTP.Patterns;
+using ZTP.Patterns.Observer;
 
 namespace ZTP.Models
 {
-    public class Product : ProductBase, INotifyPropertyChanged
+    public class Product : ProductBase, INotifyPropertyChanged, ISubject
     {
         /* POLA */
         [Key]
@@ -77,6 +78,37 @@ namespace ZTP.Models
         public Category Category { get; set; }*/
         public ICollection<ProductOrder> ProductOrders { get; set; } = new ObservableCollection<ProductOrder>();
         public ICollection<CustomerProduct> CustomerProducts { get; set; } = new ObservableCollection<CustomerProduct>();
+
+
+        /*Observator*/
+
+        private List<IObserver> _observers = new List<IObserver>();
+
+        // Методы управления подпиской.
+        public void Attach(IObserver observer)
+        {
+            Console.WriteLine("Subject: Attached an observer.");
+            this._observers.Add(observer);
+        }
+
+        public void Detach(IObserver observer)
+        {
+            this._observers.Remove(observer);
+            Console.WriteLine("Subject: Detached an observer.");
+        }
+
+        // Запуск обновления в каждом подписчике.
+        public void Notify()
+        {
+            Console.WriteLine("Subject: Notifying observers...");
+
+            foreach (var observer in _observers)
+            {
+                observer.Update(this);
+            }
+        }
+
+
 
         /* METODY */
 

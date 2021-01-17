@@ -6,11 +6,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZTP.Patterns.Observer;
 
 namespace ZTP.Models
 {
-    public class Customer
+    public class Customer : IObserver
     {
+        
         /* POLA */
         [Key]
         public int CustomerID { get; set; }
@@ -39,6 +41,14 @@ namespace ZTP.Models
         public Address Address { get; set; }*/
         public ICollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
         public ICollection<CustomerProduct> CustomerProducts { get; set; } = new ObservableCollection<CustomerProduct>();
+
+        /*Observator*/
+        public void Update(ISubject subject)
+        {
+            Console.WriteLine("Wysylamy powiadominie");
+        }
+
+
 
         /* METODY */
     }
