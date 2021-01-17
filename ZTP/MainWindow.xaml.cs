@@ -79,6 +79,33 @@ namespace ZTP
             shoppingCartList = new ObservableCollection<Product>();                                                             /* OBSERVER */
             subscribedProductsList = new ObservableCollection<Product>(database.GetAllCustomerProducts(customer));              /* OBSERVER */
             shoppingCartDecoratorsList = new ObservableCollection<ProductDecorator>();                                          /* DECORATOR */
+
+            DisableComponents(customer);
+        }
+
+        void DisableComponents(Customer customer)
+        {
+            if (customer.AdminRights == false)
+            {
+                if(MenuItem_AddProduct != null &&
+                    MenuItem_DeleteProduct != null &&
+                    TextBox_Name != null &&
+                    TextBox_VAT != null &&
+                    TextBox_Price != null &&
+                    TextBox_Quantity != null &&
+                    CheckBox_Promotion != null &&
+                    TabItem_Admin != null)
+                {
+                    MenuItem_AddProduct.Visibility = Visibility.Hidden;
+                    MenuItem_DeleteProduct.Visibility = Visibility.Hidden;
+                    TextBox_Name.IsEnabled = false;
+                    TextBox_VAT.IsEnabled = false;
+                    TextBox_Price.IsEnabled = false;
+                    TextBox_Quantity.IsEnabled = false;
+                    CheckBox_Promotion.IsEnabled = false;
+                    TabItem_Admin.Visibility = Visibility.Hidden;
+                }
+            }
         }
 
         #region Product list

@@ -271,7 +271,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Admin" Padding="5" Height="28" VerticalAlignment="Top">
+            <TabItem Name="TabItem_Admin" Header="Admin" Padding="5" Height="28" VerticalAlignment="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
