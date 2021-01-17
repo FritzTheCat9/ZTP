@@ -44,6 +44,10 @@ namespace ZTP
 
         /* DECORATOR - PATTERN */
         public IList<ProductBase> addedPackagesList { get; set; } = new ObservableCollection<ProductBase>();
+        Product changedProduct { get; set; } = null;
+        BubbleWrap productInBubbleWrap { get; set; } = null;
+        CardboardBox productInCardboardBox { get; set; } = null;
+        PlasticBox productInPlasticBox { get; set; } = null;
 
         /* BUILDER - PATTERN */
         private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order)
@@ -189,9 +193,17 @@ namespace ZTP
         {
             if (listBox_ShoppingCartList.SelectedIndex >= 0)
             {
-                var product = (Product)listBox_ShoppingCartList.SelectedItem;
+                //var product = (Product)listBox_ShoppingCartList.SelectedItem;
 
-                BubbleWrap productInBubbleWrap = new BubbleWrap(product);
+                if(productInBubbleWrap == null)
+                {
+                    changedProduct = (Product)listBox_ShoppingCartList.SelectedItem;
+                    productInBubbleWrap = new BubbleWrap(changedProduct);
+                }
+                else
+                {
+                    productInBubbleWrap = new BubbleWrap(productInBubbleWrap);
+                }
 
                 TextBlock_Description.Text = productInBubbleWrap.getDescription();
 
@@ -203,6 +215,28 @@ namespace ZTP
         {
             if (listBox_ShoppingCartList.SelectedIndex >= 0)
             {
+                //var product = (Product)listBox_ShoppingCartList.SelectedItem;
+
+                if (productInCardboardBox == null)
+                {
+                    changedProduct = (Product)listBox_ShoppingCartList.SelectedItem;
+                    productInCardboardBox = new CardboardBox(changedProduct);
+
+                    var prod = new PlasticBox(new CardboardBox(changedProduct));
+                    TextBlock_Description.Text = prod.getDescription();
+                }
+                else
+                {
+                    productInCardboardBox = new CardboardBox(productInCardboardBox);
+                }
+
+                //TextBlock_Description.Text = productInCardboardBox.getDescription();
+
+                addedPackagesList.Add(productInCardboardBox);
+            }
+
+            /*if (listBox_ShoppingCartList.SelectedIndex >= 0)
+            {
                 var product = (Product)listBox_ShoppingCartList.SelectedItem;
 
                 CardboardBox productInCardboardBox = new CardboardBox(product);
@@ -210,12 +244,31 @@ namespace ZTP
                 TextBlock_Description.Text = productInCardboardBox.getDescription();
 
                 addedPackagesList.Add(productInCardboardBox);
-            }
+            }*/
         }
 
         private void MenuItem_AddPlasticBox_Click(object sender, RoutedEventArgs e)
         {
             if (listBox_ShoppingCartList.SelectedIndex >= 0)
+            {
+                //var product = (Product)listBox_ShoppingCartList.SelectedItem;
+
+                if (productInPlasticBox == null)
+                {
+                    changedProduct = (Product)listBox_ShoppingCartList.SelectedItem;
+                    productInPlasticBox = new PlasticBox(changedProduct);
+                }
+                else
+                {
+                    productInPlasticBox = new PlasticBox(productInPlasticBox);
+                }
+
+                TextBlock_Description.Text = productInPlasticBox.getDescription();
+
+                addedPackagesList.Add(productInPlasticBox);
+            }
+
+            /*if (listBox_ShoppingCartList.SelectedIndex >= 0)
             {
                 var product = (Product)listBox_ShoppingCartList.SelectedItem;
 
@@ -224,7 +277,7 @@ namespace ZTP
                 TextBlock_Description.Text = productInPlasticBox.getDescription();
 
                 addedPackagesList.Add(productInPlasticBox);
-            }
+            }*/
         }
 
         private void MenuItem_RemoveFromCart_Click(object sender, RoutedEventArgs e)
