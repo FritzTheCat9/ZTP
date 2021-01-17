@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/ZTP/Migrations/20210117001406_migracja.cs
+/ZTP/Migrations/20210117001406_migracja.Designer.cs

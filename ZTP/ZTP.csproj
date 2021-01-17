@@ -231,6 +231,10 @@
     <Compile Include="Patterns\Builder\InvoiceBuilderTxt.cs" />
     <Compile Include="Patterns\Decorator\ProductDecorator.cs" />
     <Compile Include="Patterns\Decorator\ProductBase.cs" />
+    <Compile Include="Patterns\Iterator\ProductsNthIterator.cs" />
+    <Compile Include="Patterns\Iterator\Iterator.cs" />
+    <Compile Include="Patterns\Iterator\IteratorAggregate.cs" />
+    <Compile Include="Patterns\Iterator\ProductsCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
