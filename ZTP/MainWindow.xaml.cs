@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ZTP.Models;
 using ZTP.Patterns;
+using ZTP.Patterns.Iterator;
 
 namespace ZTP
 {
@@ -307,7 +308,16 @@ namespace ZTP
 
         private void button_discountProducts_Click(object sender, RoutedEventArgs e)
         {
+            //changing price for even 5-th product
+            var collection = new ProductsCollection(productsList, 5);         
 
+            foreach (var element in collection)
+            {
+               //changing price here                
+               var product = (Product)element;
+               product.Price = Math.Round(product.Price * 95 / 100, 2);               
+               database.UpdateProduct(product);
+            }
         }
 
         private void comboBox_OrderStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
