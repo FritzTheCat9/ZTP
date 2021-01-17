@@ -32,7 +32,7 @@ namespace ZTP.Patterns.Iterator
 
         public override IEnumerator GetEnumerator()
         {
-            return new AlphabeticalOrderIterator(this, _nth);
+            return new ProductsNthIterator(this, _nth);
         }
     }
 }

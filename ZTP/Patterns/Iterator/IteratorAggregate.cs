@@ -10,6 +10,7 @@ namespace ZTP.Patterns.Iterator
 {
     abstract class IteratorAggregate : IEnumerable
     {
+        
         public abstract IEnumerator GetEnumerator();
     }
 }

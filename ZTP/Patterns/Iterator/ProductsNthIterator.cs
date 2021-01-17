@@ -7,13 +7,13 @@ using System.Collections;
 
 namespace ZTP.Patterns.Iterator
 {
-    class AlphabeticalOrderIterator : Iterator
+    class ProductsNthIterator : Iterator
     {
         private ProductsCollection _collection;
         private int _position = -1;
         private int _nth = 1;
 
-        public AlphabeticalOrderIterator(ProductsCollection collection, int nth = 1)
+        public ProductsNthIterator(ProductsCollection collection, int nth = 1)
         {
             this._collection = collection;
             this._nth = nth;
