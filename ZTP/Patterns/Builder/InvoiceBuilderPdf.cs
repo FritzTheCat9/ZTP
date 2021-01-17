@@ -46,17 +46,15 @@ namespace ZTP.Models
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
         }
 
-        public void AddPrice(decimal price, decimal packagesPrice)
+        public void AddPrice(decimal price)
         {
             DocumentBuilder db = new DocumentBuilder(dc);
             db.CharacterFormat.Size = 15.0f;
             db.CharacterFormat.FontColor = SautinSoft.Document.Color.Black;
 
-            var sumPrice = price + packagesPrice;
-
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
             db.CharacterFormat.Bold = true;
-            db.Write("Order Price: " + sumPrice + "zł");
+            db.Write("Order Price: " + price + "zł");
             db.CharacterFormat.Bold = false;
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
         }

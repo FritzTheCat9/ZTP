@@ -1,7 +1,6 @@
 
 ------------------------------------------------- 
 Seller Info: 
-
 FirstName: Robert
 LastName: Lewandowski
 ------------------------------------------------- 
@@ -9,27 +8,24 @@ LastName: Lewandowski
 
 ------------------------------------------------- 
 Customer: 
-
-FirstName: Robert
-LastName: Nowak
+FirstName: Jan
+LastName: Kowalski
 ------------------------------------------------- 
 
 
 ------------------------------------------------- 
-Order Price: 80,00zł
+Order Price: 30,00zł
 ------------------------------------------------- 
 
 
 ------------------------------------------------- 
 PaymentMethod: 
-
 Name: Szybki przelew
 ------------------------------------------------- 
 
 
 ------------------------------------------------- 
 ShippingMethod: 
-
 Name: Kurier UPS
 ------------------------------------------------- 
 
@@ -42,16 +38,12 @@ Price: 5,00zł
 VAT: 23%
 Packages: Czipsy
 Dodatek: Folia bąbelkowa + 5zł
-Dodatek: Folia bąbelkowa + 5zł
-Dodatek: Kartonowe pudełko + 10zł
-Dodatek: Plastikowe pudełko + 15zł
-Dodatek: Plastikowe pudełko + 15zł
-Dodatek: Kartonowe pudełko + 10zł
 
 Name: Czipsy
 Price: 5,00zł
 VAT: 23%
 Packages: Czipsy
+Dodatek: Folia bąbelkowa + 5zł
 Dodatek: Kartonowe pudełko + 10zł
 
 ------------------------------------------------- 

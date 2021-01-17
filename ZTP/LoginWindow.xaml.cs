@@ -22,8 +22,7 @@ namespace ZTP
     {
         public Customer customer = null;
 
-        /*public string login = "";
-        public string password = "";*/
+        public Database database = Database.GetInstance();
 
         public LoginWindow()
         {
@@ -32,7 +31,7 @@ namespace ZTP
 
         private void Button_Login_Click(object sender, RoutedEventArgs e)
         {
-            customer = Database.GetInstance().CheckLoginAndPassword(TextBox_Login.Text, TextBox_Password.Text);
+            customer = database.CheckLoginAndPassword(TextBox_Login.Text, TextBox_Password.Text);
 
             if (customer != null)
             {
@@ -40,12 +39,6 @@ namespace ZTP
                 Close();
                 mainWindow.ShowDialog();
             }
-
-            /*login = TextBox_Login.Text;
-            password = TextBox_Password.Text;
-
-            DialogResult = true;
-            Close();*/
         }
     }
 }

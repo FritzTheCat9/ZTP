@@ -26,7 +26,8 @@ namespace ZTP
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Database database = Database.GetInstance();
+        //private Database database = Database.GetInstance();
+        private Database database = null;
         public Customer customer { get; set; } = null;
         private decimal shoppingCartPrice { get; set; } = 0;
 
@@ -49,11 +50,11 @@ namespace ZTP
         decimal packagesPrice = 0;
 
         /* BUILDER - PATTERN */
-        private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order, IList<ProductDecorator> shoppingCartDecoratorsList, decimal packagesPrice)
+        private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order, IList<ProductDecorator> shoppingCartDecoratorsList)
         {
             invoiceBuilder.AddSellerInfo();
             invoiceBuilder.AddCustomerInfo(order.Customer);
-            invoiceBuilder.AddPrice(order.Price, packagesPrice);
+            invoiceBuilder.AddPrice(order.Price);
             invoiceBuilder.AddPaymentMethodInfo(order.PaymentMethod);
             invoiceBuilder.AddShippingMethodInfo(order.ShippingMethod);
             invoiceBuilder.AddProductsInfo(shoppingCartList.ToList(), shoppingCartDecoratorsList);
@@ -65,6 +66,7 @@ namespace ZTP
             DataContext = this;
 
             customer = loginWindow.customer;
+            database = loginWindow.database;
 
             productsList = new ObservableCollection<Product>(database.GetAllProducts().ToList());
             customersList = new ObservableCollection<Customer>(database.GetAllCustomers().ToList());
@@ -265,7 +267,7 @@ namespace ZTP
         {
             var shippingMethod = (ShippingMethod)comboBox_ShippingMethod.SelectedItem;
             var paymentMethod = (PaymentMethod)comboBox_PaymentMethod.SelectedItem;
-            var order = new Order { Customer = customer, ShippingMethod = shippingMethod, PaymentMethod = paymentMethod, OrderStatus = State.Preparing, Price = shoppingCartPrice };
+            var order = new Order { Customer = customer, ShippingMethod = shippingMethod, PaymentMethod = paymentMethod, OrderStatus = State.Preparing, Price = shoppingCartPrice + packagesPrice };
             database.AddOrder(order);
 
             ordersList.Add(order);
@@ -284,7 +286,7 @@ namespace ZTP
             if (comboBox_MakeInvoice.SelectedIndex == 0)
             {
                 InvoiceBuilderTxt invoiceBuilder = new InvoiceBuilderTxt();
-                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList, packagesPrice);
+                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
                 var invoiceText = invoiceBuilder.GetInvoiceInTxt();
                 path += ".txt";
                 File.WriteAllText(path, invoiceText);
@@ -292,7 +294,7 @@ namespace ZTP
             else
             {
                 InvoiceBuilderPdf invoiceBuilder = new InvoiceBuilderPdf();
-                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList, packagesPrice);
+                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
                 DocumentCore invoicePdf = invoiceBuilder.GetInvoiceInPdf();
                 path += ".pdf";
                 invoicePdf.Save(path);

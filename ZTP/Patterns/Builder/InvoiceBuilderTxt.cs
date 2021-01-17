@@ -32,13 +32,11 @@ namespace ZTP.Patterns
             innvoiceText += "\n";
         }
 
-        public void AddPrice(decimal price, decimal packagesPrice)
+        public void AddPrice(decimal price)
         {
-            var sumPrice = price + packagesPrice;
-
             innvoiceText += "\n";
             innvoiceText += "------------------------------------------------- \n";
-            innvoiceText += "Order Price: " + sumPrice + "zł\n";
+            innvoiceText += "Order Price: " + price + "zł\n";
             innvoiceText += "------------------------------------------------- \n";
             innvoiceText += "\n";
         }
