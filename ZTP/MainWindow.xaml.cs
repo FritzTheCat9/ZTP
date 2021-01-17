@@ -46,12 +46,14 @@ namespace ZTP
         /* DECORATOR - PATTERN */
         public IList<ProductDecorator> shoppingCartDecoratorsList { get; set; } = new ObservableCollection<ProductDecorator>();
         bool cartChanged = false;
+        decimal packagesPrice = 0;
 
         /* BUILDER - PATTERN */
-        private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order, IList<ProductDecorator> shoppingCartDecoratorsList)
+        private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order, IList<ProductDecorator> shoppingCartDecoratorsList, decimal packagesPrice)
         {
             invoiceBuilder.AddSellerInfo();
             invoiceBuilder.AddCustomerInfo(order.Customer);
+            invoiceBuilder.AddPrice(order.Price, packagesPrice);
             invoiceBuilder.AddPaymentMethodInfo(order.PaymentMethod);
             invoiceBuilder.AddShippingMethodInfo(order.ShippingMethod);
             invoiceBuilder.AddProductsInfo(shoppingCartList.ToList(), shoppingCartDecoratorsList);
@@ -192,6 +194,7 @@ namespace ZTP
             if(cartChanged && TextBlock_Description != null)
             {
                 cartChanged = false;
+                packagesPrice = 0;
                 shoppingCartDecoratorsList.Clear();
                 for (int i = 0; i < shoppingCartList.Count; i++)
                 {
@@ -208,6 +211,7 @@ namespace ZTP
             {
                 shoppingCartDecoratorsList[index] = new BubbleWrap(shoppingCartDecoratorsList[index]);
                 TextBlock_Description.Text = shoppingCartDecoratorsList[index].getDescription();
+                packagesPrice += 5;
             }
         }
 
@@ -218,6 +222,7 @@ namespace ZTP
             {
                 shoppingCartDecoratorsList[index] = new CardboardBox(shoppingCartDecoratorsList[index]);
                 TextBlock_Description.Text = shoppingCartDecoratorsList[index].getDescription();
+                packagesPrice += 10;
             }
         }
 
@@ -228,6 +233,7 @@ namespace ZTP
             {
                 shoppingCartDecoratorsList[index] = new PlasticBox(shoppingCartDecoratorsList[index]);
                 TextBlock_Description.Text = shoppingCartDecoratorsList[index].getDescription();
+                packagesPrice += 15;
             }
         }
 
@@ -278,7 +284,7 @@ namespace ZTP
             if (comboBox_MakeInvoice.SelectedIndex == 0)
             {
                 InvoiceBuilderTxt invoiceBuilder = new InvoiceBuilderTxt();
-                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
+                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList, packagesPrice);
                 var invoiceText = invoiceBuilder.GetInvoiceInTxt();
                 path += ".txt";
                 File.WriteAllText(path, invoiceText);
@@ -286,7 +292,7 @@ namespace ZTP
             else
             {
                 InvoiceBuilderPdf invoiceBuilder = new InvoiceBuilderPdf();
-                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
+                constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList, packagesPrice);
                 DocumentCore invoicePdf = invoiceBuilder.GetInvoiceInPdf();
                 path += ".pdf";
                 invoicePdf.Save(path);

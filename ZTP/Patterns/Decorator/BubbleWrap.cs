@@ -17,7 +17,7 @@ namespace ZTP.Patterns
 
         public override string getDescription()
         {
-            return base.getDescription() + "Dodatek: Folia bąbelkowa \n";
+            return base.getDescription() + "Dodatek: Folia bąbelkowa + 5zł\n";
         }
     }
 }

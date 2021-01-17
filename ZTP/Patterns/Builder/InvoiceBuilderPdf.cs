@@ -46,6 +46,21 @@ namespace ZTP.Models
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
         }
 
+        public void AddPrice(decimal price, decimal packagesPrice)
+        {
+            DocumentBuilder db = new DocumentBuilder(dc);
+            db.CharacterFormat.Size = 15.0f;
+            db.CharacterFormat.FontColor = SautinSoft.Document.Color.Black;
+
+            var sumPrice = price + packagesPrice;
+
+            db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
+            db.CharacterFormat.Bold = true;
+            db.Write("Order Price: " + sumPrice + "zł");
+            db.CharacterFormat.Bold = false;
+            db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
+        }
+
         public void AddProductsInfo(List<Product> products, IList<ProductDecorator> shoppingCartDecoratorsList)
         {
             DocumentBuilder db = new DocumentBuilder(dc);
@@ -63,9 +78,9 @@ namespace ZTP.Models
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
                 db.Write(i + 1 + ". Name: " + products[i].Name);
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
-                db.Write("Price: " + products[i].Price);
+                db.Write("Price: " + products[i].Price + "zł");
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
-                db.Write("VAT: " + products[i].VAT);
+                db.Write("VAT: " + products[i].VAT + "%");
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak); 
                 db.Write("Packages: " + shoppingCartDecoratorsList[i].getDescription());
                 db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);

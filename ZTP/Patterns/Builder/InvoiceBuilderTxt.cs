@@ -16,7 +16,6 @@ namespace ZTP.Patterns
             innvoiceText += "\n";
             innvoiceText += "------------------------------------------------- \n";
             innvoiceText += "Customer: \n";
-            innvoiceText += "\n";
             innvoiceText += "FirstName: " + customer.FirstName + "\n";
             innvoiceText += "LastName: " + customer.LastName + "\n";
             innvoiceText += "------------------------------------------------- \n";
@@ -28,8 +27,18 @@ namespace ZTP.Patterns
             innvoiceText += "\n";
             innvoiceText += "------------------------------------------------- \n";
             innvoiceText += "PaymentMethod: \n";
-            innvoiceText += "\n";
             innvoiceText += "Name: " + paymentMethod.Name + "\n";
+            innvoiceText += "------------------------------------------------- \n";
+            innvoiceText += "\n";
+        }
+
+        public void AddPrice(decimal price, decimal packagesPrice)
+        {
+            var sumPrice = price + packagesPrice;
+
+            innvoiceText += "\n";
+            innvoiceText += "------------------------------------------------- \n";
+            innvoiceText += "Order Price: " + sumPrice + "zł\n";
             innvoiceText += "------------------------------------------------- \n";
             innvoiceText += "\n";
         }
@@ -45,8 +54,8 @@ namespace ZTP.Patterns
             for (int i = 0; i < products.Count; i++)
             {
                 innvoiceText += "Name: " + products[i].Name + "\n";
-                innvoiceText += "Price: " + products[i].Price + "\n";
-                innvoiceText += "VAT: " + products[i].VAT + "\n";
+                innvoiceText += "Price: " + products[i].Price + "zł\n";
+                innvoiceText += "VAT: " + products[i].VAT + "%\n";
                 innvoiceText += "Packages: " + shoppingCartDecoratorsList[i].getDescription() + "\n";
             }
 
@@ -59,7 +68,6 @@ namespace ZTP.Patterns
             innvoiceText += "\n";
             innvoiceText += "------------------------------------------------- \n";
             innvoiceText += "Seller Info: \n";
-            innvoiceText += "\n";
             innvoiceText += "FirstName: Robert" + "\n";
             innvoiceText += "LastName: Lewandowski" + "\n";
             innvoiceText += "------------------------------------------------- \n";
@@ -71,7 +79,6 @@ namespace ZTP.Patterns
             innvoiceText += "\n";
             innvoiceText += "------------------------------------------------- \n";
             innvoiceText += "ShippingMethod: \n";
-            innvoiceText += "\n";
             innvoiceText += "Name: " + shippingMethod.Name + "\n";
             innvoiceText += "------------------------------------------------- \n";
             innvoiceText += "\n";

@@ -17,7 +17,7 @@ namespace ZTP.Patterns
 
         public override string getDescription()
         {
-            return base.getDescription() + "Dodatek: Plastikowe pudełko \n";
+            return base.getDescription() + "Dodatek: Plastikowe pudełko + 15zł\n";
         }
     }
 }

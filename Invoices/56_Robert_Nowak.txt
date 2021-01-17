@@ -10,27 +10,49 @@ LastName: Lewandowski
 ------------------------------------------------- 
 Customer: 
 
-FirstName: Jan
-LastName: Kowalski
+FirstName: Robert
+LastName: Nowak
+------------------------------------------------- 
+
+
+------------------------------------------------- 
+Order Price: 80,00zł
 ------------------------------------------------- 
 
 
 ------------------------------------------------- 
 PaymentMethod: 
 
-Name: Karta
+Name: Szybki przelew
 ------------------------------------------------- 
 
 
 ------------------------------------------------- 
 ShippingMethod: 
 
-Name: Poczta Polska
+Name: Kurier UPS
 ------------------------------------------------- 
 
 
 ------------------------------------------------- 
 Ordered products: 
+
+Name: Czipsy
+Price: 5,00zł
+VAT: 23%
+Packages: Czipsy
+Dodatek: Folia bąbelkowa + 5zł
+Dodatek: Folia bąbelkowa + 5zł
+Dodatek: Kartonowe pudełko + 10zł
+Dodatek: Plastikowe pudełko + 15zł
+Dodatek: Plastikowe pudełko + 15zł
+Dodatek: Kartonowe pudełko + 10zł
+
+Name: Czipsy
+Price: 5,00zł
+VAT: 23%
+Packages: Czipsy
+Dodatek: Kartonowe pudełko + 10zł
 
 ------------------------------------------------- 
 

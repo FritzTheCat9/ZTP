@@ -14,5 +14,6 @@ namespace ZTP.Patterns
         void AddPaymentMethodInfo(PaymentMethod paymentMethod);
         void AddProductsInfo(List<Product> products, IList<ProductDecorator> shoppingCartDecoratorsList);
         void AddSellerInfo();
+        void AddPrice(decimal price, decimal packagesPrice);
     }
 }
