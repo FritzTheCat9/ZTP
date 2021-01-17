@@ -113,13 +113,16 @@
 
                     <Label Grid.Column="1" Content="Added products packages" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
 
-                    <ListBox Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Name="listBox_addedPackages" 
+                    <TextBox Name="TextBlock_Description" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                             IsEnabled="False"/>
+
+                    <!--<ListBox Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Name="listBox_addedPackages" 
                              ItemsSource="{Binding addedPackagesList}" DisplayMemberPath="ProductDisplay"
                              Padding="5" Margin="5"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ScrollViewer.VerticalScrollBarVisibility="Visible"
-                             ScrollViewer.CanContentScroll="False">
-                    </ListBox>
+                             ScrollViewer.CanContentScroll="False" Height="10">
+                    </ListBox>-->
                 </Grid>
             </TabItem>
             <TabItem Header="Order" Padding="5">

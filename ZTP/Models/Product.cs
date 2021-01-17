@@ -7,10 +7,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZTP.Patterns;
 
 namespace ZTP.Models
 {
-    public class Product : INotifyPropertyChanged
+    public class Product : ProductBase, INotifyPropertyChanged
     {
         /* POLA */
         [Key]
@@ -26,7 +27,7 @@ namespace ZTP.Models
         public string Name
         {
             get { return _name; }
-            set { _name = value; NotifyPropertyChanged("ProductDisplay"); }
+            set { _name = value; NotifyPropertyChanged("ProductDisplay"); NotifyPropertyChanged("ProductDescription"); }
         }
 
         /*[Required]
@@ -65,6 +66,11 @@ namespace ZTP.Models
             get { return Name + " (" + Price + ") "; }
         }
 
+        public string ProductDescription
+        {
+            get { return getDescription(); }
+        }
+
 
         /* POLA - ENTITY FRAMEWORK */
         /*[Display(Name = "KategoriaId")]
@@ -82,6 +88,16 @@ namespace ZTP.Models
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
+        }
+
+        public override decimal getPrice()
+        {
+            return Price;
+        }
+
+        public override string getDescription()
+        {
+            return Name + "\n";
         }
     }
 }
