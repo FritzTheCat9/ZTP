@@ -9,11 +9,14 @@ namespace ZTP.Patterns
 {
     public interface InvoiceBuilder
     {
+        void AddInvoiceTitle();
+        void AddReceiptTitle();
         void AddCustomerInfo(Customer customer);
         void AddShippingMethodInfo(ShippingMethod shippingMethod);
         void AddPaymentMethodInfo(PaymentMethod paymentMethod);
-        void AddProductsInfo(List<Product> products, IList<ProductDecorator> shoppingCartDecoratorsList);
+        void AddProductsInfo(List<Product> products, List<ProductDecorator> shoppingCartDecoratorsList);
         void AddSellerInfo();
         void AddPrice(decimal price);
+        void AddDate();
     }
 }

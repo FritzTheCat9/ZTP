@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using ZTP.Models;
 using ZTP.Patterns;
 using ZTP.Patterns.Iterator;
+using ZTP.Patterns.Strategy;
 
 namespace ZTP
 {
@@ -51,14 +52,28 @@ namespace ZTP
         decimal packagesPrice = 0;
 
         /* BUILDER - PATTERN */
-        private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order, IList<ProductDecorator> shoppingCartDecoratorsList)
+        private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order, List<ProductDecorator> shoppingCartDecoratorsList, List<Product> shoppingCartList)
         {
             invoiceBuilder.AddSellerInfo();
+            invoiceBuilder.AddDate();
             invoiceBuilder.AddCustomerInfo(order.Customer);
             invoiceBuilder.AddPrice(order.Price);
             invoiceBuilder.AddPaymentMethodInfo(order.PaymentMethod);
             invoiceBuilder.AddShippingMethodInfo(order.ShippingMethod);
-            invoiceBuilder.AddProductsInfo(shoppingCartList.ToList(), shoppingCartDecoratorsList);
+            invoiceBuilder.AddProductsInfo(shoppingCartList, shoppingCartDecoratorsList);
+        }
+
+        /* STRATEGY - PATTERN */
+        private IBillingStrategy strategy;
+
+        public void setStrategy(IBillingStrategy billingStrategy)
+        {
+            strategy = billingStrategy;
+        }
+
+        public void createDocument(InvoiceBuilder invoiceBuilder, Order order, List<ProductDecorator> shoppingCartDecoratorsList, List<Product> shoppingCartList)
+        {
+            strategy.constructDocument(invoiceBuilder, order, shoppingCartDecoratorsList, shoppingCartList);
         }
 
         public MainWindow(LoginWindow loginWindow)
@@ -82,6 +97,7 @@ namespace ZTP
             shoppingCartDecoratorsList = new ObservableCollection<ProductDecorator>();                                          /* DECORATOR */
 
             DisableComponents(customer);
+            setStrategy(new InvoiceStrategy());         // domyślnie robimy faktury (można zmienić na paragony)
         }
 
         void DisableComponents(Customer customer)
@@ -296,6 +312,19 @@ namespace ZTP
 
         #region Order
 
+        private void comboBox_BillingStrategy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var index = comboBox_BillingStrategy.SelectedIndex;                                                     // zmiana strategii zapisywanie faktury lub paragonu
+            if(index == 0)
+            {
+                setStrategy(new InvoiceStrategy());
+            }
+            else
+            {
+                setStrategy(new ReceiptStrategy());
+            }
+        }
+
         private void listBox_OrderProductList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var index = listBox_OrderProductList.SelectedIndex;
@@ -332,7 +361,7 @@ namespace ZTP
                 if (comboBox_MakeInvoice.SelectedIndex == 0)
                 {
                     InvoiceBuilderTxt invoiceBuilder = new InvoiceBuilderTxt();
-                    constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
+                    strategy.constructDocument(invoiceBuilder, order, shoppingCartDecoratorsList.ToList(), shoppingCartList.ToList());
                     var invoiceText = invoiceBuilder.GetInvoiceInTxt();
                     path += ".txt";
                     File.WriteAllText(path, invoiceText);
@@ -340,7 +369,8 @@ namespace ZTP
                 else
                 {
                     InvoiceBuilderPdf invoiceBuilder = new InvoiceBuilderPdf();
-                    constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList);
+                    //constructInvoice(invoiceBuilder, order, shoppingCartDecoratorsList.ToList(), shoppingCartList.ToList());
+                    strategy.constructDocument(invoiceBuilder, order, shoppingCartDecoratorsList.ToList(), shoppingCartList.ToList());
                     DocumentCore invoicePdf = invoiceBuilder.GetInvoiceInPdf();
                     path += ".pdf";
                     invoicePdf.Save(path);
@@ -437,6 +467,5 @@ namespace ZTP
         }
 
         #endregion
-
     }
 }

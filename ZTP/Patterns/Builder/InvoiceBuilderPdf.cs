@@ -31,6 +31,29 @@ namespace ZTP.Models
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
         }
 
+        public void AddDate()
+        {
+            DocumentBuilder db = new DocumentBuilder(dc);
+            db.CharacterFormat.Size = 15.0f;
+            db.CharacterFormat.FontColor = SautinSoft.Document.Color.Black;
+
+            db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
+            db.Write("Date: " + DateTime.Now.ToString()); ;
+            db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
+        }
+
+        public void AddInvoiceTitle()
+        {
+            DocumentBuilder db = new DocumentBuilder(dc);
+            db.CharacterFormat.FontName = "Verdana";
+            db.CharacterFormat.Size = 30.0f;
+            db.CharacterFormat.FontColor = SautinSoft.Document.Color.Orange;
+            db.CharacterFormat.Bold = true;
+            db.Write("Invoice");
+            db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
+            db.CharacterFormat.Bold = false;
+        }
+
         public void AddPaymentMethodInfo(PaymentMethod paymentMethod)
         {
             DocumentBuilder db = new DocumentBuilder(dc);
@@ -59,7 +82,7 @@ namespace ZTP.Models
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
         }
 
-        public void AddProductsInfo(List<Product> products, IList<ProductDecorator> shoppingCartDecoratorsList)
+        public void AddProductsInfo(List<Product> products, List<ProductDecorator> shoppingCartDecoratorsList)
         {
             DocumentBuilder db = new DocumentBuilder(dc);
             db.CharacterFormat.Size = 15.0f;
@@ -90,17 +113,21 @@ namespace ZTP.Models
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
         }
 
-        public void AddSellerInfo()
+        public void AddReceiptTitle()
         {
             DocumentBuilder db = new DocumentBuilder(dc);
             db.CharacterFormat.FontName = "Verdana";
             db.CharacterFormat.Size = 30.0f;
             db.CharacterFormat.FontColor = SautinSoft.Document.Color.Orange;
             db.CharacterFormat.Bold = true;
-            db.Write("Invoice");
+            db.Write("Receipt");
             db.InsertSpecialCharacter(SpecialCharacterType.LineBreak);
             db.CharacterFormat.Bold = false;
+        }
 
+    public void AddSellerInfo()
+        {
+            DocumentBuilder db = new DocumentBuilder(dc);
             db.CharacterFormat.Size = 15.0f;
             db.CharacterFormat.FontColor = SautinSoft.Document.Color.Black;
 

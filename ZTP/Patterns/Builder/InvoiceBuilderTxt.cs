@@ -22,6 +22,24 @@ namespace ZTP.Patterns
             innvoiceText += "\n";
         }
 
+        public void AddDate()
+        {
+            innvoiceText += "\n";
+            innvoiceText += "------------------------------------------------- \n";
+            innvoiceText += "Date: " + DateTime.Now.ToString() + "\n";
+            innvoiceText += "------------------------------------------------- \n";
+            innvoiceText += "\n";
+        }
+
+        public void AddInvoiceTitle()
+        {
+            innvoiceText += "\n";
+            innvoiceText += "------------------------------------------------- \n";
+            innvoiceText += "INVOICE\n";
+            innvoiceText += "------------------------------------------------- \n";
+            innvoiceText += "\n";
+        }
+
         public void AddPaymentMethodInfo(PaymentMethod paymentMethod)
         {
             innvoiceText += "\n";
@@ -41,7 +59,7 @@ namespace ZTP.Patterns
             innvoiceText += "\n";
         }
 
-        public void AddProductsInfo(List<Product> products, IList<ProductDecorator> shoppingCartDecoratorsList)
+        public void AddProductsInfo(List<Product> products, List<ProductDecorator> shoppingCartDecoratorsList)
         {
             innvoiceText += "\n";
             innvoiceText += "------------------------------------------------- \n";
@@ -60,6 +78,15 @@ namespace ZTP.Patterns
                 }
             }
 
+            innvoiceText += "------------------------------------------------- \n";
+            innvoiceText += "\n";
+        }
+
+        public void AddReceiptTitle()
+        {
+            innvoiceText += "\n";
+            innvoiceText += "------------------------------------------------- \n";
+            innvoiceText += "RECEIPT\n";
             innvoiceText += "------------------------------------------------- \n";
             innvoiceText += "\n";
         }

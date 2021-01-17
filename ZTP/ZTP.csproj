@@ -236,6 +236,9 @@
     <Compile Include="Patterns\Iterator\Iterator.cs" />
     <Compile Include="Patterns\Iterator\IteratorAggregate.cs" />
     <Compile Include="Patterns\Iterator\ProductsCollection.cs" />
+    <Compile Include="Patterns\Strategy\IBillingStrategy.cs" />
+    <Compile Include="Patterns\Strategy\InvoiceStrategy.cs" />
+    <Compile Include="Patterns\Strategy\ReceiptStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
