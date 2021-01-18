@@ -53,7 +53,7 @@ namespace ZTP
         decimal packagesPrice = 0;
 
         /* BUILDER - PATTERN */
-        private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order, List<ProductDecorator> shoppingCartDecoratorsList, List<Product> shoppingCartList)
+        /*private void constructInvoice(InvoiceBuilder invoiceBuilder, Order order, List<ProductDecorator> shoppingCartDecoratorsList, List<Product> shoppingCartList)
         {
             invoiceBuilder.AddSellerInfo();
             invoiceBuilder.AddDate();
@@ -62,7 +62,7 @@ namespace ZTP
             invoiceBuilder.AddPaymentMethodInfo(order.PaymentMethod);
             invoiceBuilder.AddShippingMethodInfo(order.ShippingMethod);
             invoiceBuilder.AddProductsInfo(shoppingCartList, shoppingCartDecoratorsList);
-        }
+        }*/
 
         /* STRATEGY - PATTERN */
         private IBillingStrategy strategy;
